@@ -162,6 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Graphics\Color.cpp" />
+    <ClCompile Include="src\Graphics\ScreenBuffer.cpp" />
     <ClCompile Include="src\Utils\DynamicIntArray.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Utils\Utils.cpp" />
@@ -169,6 +170,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Graphics\Color.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\ScreenBuffer.h">
       <SubType>
       </SubType>
     </ClInclude>
