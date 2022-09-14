@@ -4,7 +4,13 @@
 
 int main(int arg, char *argv[])
 {	
-	std::cout << "Hello World! \n";
+	Vec2D gordo(32,45);
+	Vec2D cipote;
+
+	cipote = 4 * gordo;
+
+	std::cout << -gordo;
+	std::cout << cipote;
 	
 	return 0;
 }
