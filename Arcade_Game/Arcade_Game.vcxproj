@@ -161,13 +161,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DynamicIntArray.cpp" />
+    <ClCompile Include="src\Utils\DynamicIntArray.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Utils\Utils.cpp" />
     <ClCompile Include="src\Utils\Vec2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DynamicIntArray.h">
+    <ClInclude Include="src\Utils\DynamicIntArray.h">
       <SubType>
       </SubType>
     </ClInclude>

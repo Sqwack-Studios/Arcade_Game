@@ -16,7 +16,8 @@
 class DynamicIntArray
 {
 private:
-	static const int INITIAL_CAPACITY{ 10 };
+	const static int INITIAL_CAPACITY = 10;
+	const static int RESIZE_MULTIPLIER = 2;
 	int* moptrData;
 	int mSize;
 	int mCapacity;
@@ -29,10 +30,14 @@ public:
 	DynamicIntArray(const DynamicIntArray& otherArray);
 	~DynamicIntArray();
 
+	DynamicIntArray& operator=(const DynamicIntArray& otherArray);
+
 	inline int Size() const { return mSize; }
 	inline int Capacity() const { return mCapacity; }
 
-	bool Init(int capacity = INITIAL_CAPACITY);
+	bool Init(const int &capacity = INITIAL_CAPACITY);
+
+	void Copy(const DynamicIntArray& otherArray);
 
 	bool Reserve(int capacity);
 

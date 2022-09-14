@@ -24,7 +24,7 @@
     <ClCompile Include="src\Utils\Utils.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="DynamicIntArray.cpp">
+    <ClCompile Include="src\Utils\DynamicIntArray.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +35,7 @@
     <ClInclude Include="src\Utils\Utils.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="DynamicIntArray.h">
+    <ClInclude Include="src\Utils\DynamicIntArray.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

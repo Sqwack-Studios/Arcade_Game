@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL.h>
 #include "Vec2D.h"
+#include "DynamicIntArray.h"
 
 int main(int arg, char *argv[])
 {	
