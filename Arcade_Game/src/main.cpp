@@ -18,7 +18,7 @@
 
 const int SCREEN_WIDTH = 250;
 const int SCREEN_HEIGHT = 250;
-const int MAGNIFICATION = 4;
+const int MAGNIFICATION = 3;
 
 
 
@@ -27,7 +27,7 @@ int main(int arg, char *argv[])
 
 	Screen theScreen;
 	theScreen.Init(SCREEN_WIDTH, SCREEN_HEIGHT, MAGNIFICATION);
-	theScreen.Draw(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, Color::Red());
+	theScreen.Draw(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, Color::Yellow());
 	theScreen.SwapScreen();
 
 	SDL_Event sdlEvent;
