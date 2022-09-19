@@ -67,3 +67,9 @@ float Line2D::Lenght() const
 {
 	return 0.0f;
 }
+
+void Line2D::Rotate(const float& angle, const Vec2D& aroundPoint)
+{
+	mP0.Rotate(angle, aroundPoint);
+	mP1.Rotate(angle, aroundPoint);
+}

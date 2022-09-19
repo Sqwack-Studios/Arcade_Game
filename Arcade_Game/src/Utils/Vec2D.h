@@ -7,10 +7,16 @@
 
 
 /////////////////////////////////////////////////////
+extern const int SCREEN_WIDTH;
+extern const int SCREEN_HEIGHT;
+/////////////////////////////////////////////////////
+
 class Vec2D {
 
 public:
 	static const Vec2D Zero;
+	static Vec2D CentreScreen() { return Vec2D(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2); };
+
 
 	Vec2D() : Vec2D(0.f, 0.f) {}
 	Vec2D(float x, float y) : mX(x), mY(y) {}
@@ -60,6 +66,7 @@ public:
 private:
 
 	float mX, mY;
+
 
 };
 

@@ -9,16 +9,22 @@
 //=================================================================================
 
 
+#pragma once
 #include <iostream>
 #include <SDL.h>
-#include "Vec2D.h"
+
+
 #include "Color.h"
-#include "ScreenBuffer.h"
 #include "Screen.h"
+#include "Line2D.h"
+#include "Star2D.h"
+#include "Utils.h"
+
+
 
 const int SCREEN_WIDTH = 250;
 const int SCREEN_HEIGHT = 250;
-const int MAGNIFICATION = 3;
+const int MAGNIFICATION = 4;
 
 
 
@@ -27,8 +33,19 @@ int main(int arg, char *argv[])
 
 	Screen theScreen;
 	theScreen.Init(SCREEN_WIDTH, SCREEN_HEIGHT, MAGNIFICATION);
-	theScreen.Draw(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, Color::Yellow());
+	Vec2D center = Vec2D::CentreScreen();
+	theScreen.Draw(center, Color::Yellow());
+
+
+	Star2D star(Vec2D::CentreScreen(), 100, 30, 5, 0.0f);
+	theScreen.Draw(star.SendToBuffer(), Color::Red());
+
+
 	theScreen.SwapScreen();
+
+
+
+
 
 	SDL_Event sdlEvent;
 	bool running = true;

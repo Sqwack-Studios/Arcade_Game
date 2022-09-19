@@ -4,6 +4,8 @@
 
 const Vec2D Vec2D::Zero;
 
+
+
 std::ostream& operator<< (std::ostream& OutConsole, const Vec2D& vec)
 {
 	std::cout << "X: " << vec.mX << "\tY: " << vec.mY << std::endl;

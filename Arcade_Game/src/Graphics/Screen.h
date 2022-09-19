@@ -15,9 +15,11 @@
 #include <stdint.h>
 #include "ScreenBuffer.h"
 #include "Color.h"
+#include <vector>
 
 
 class Vec2D;
+class Line2D;
 struct SDL_Window;
 struct SDL_Surface;
 
@@ -56,7 +58,8 @@ public:
 	//Draw Methods go here
 	void Draw(int x, int y, const Color& color);
 	void Draw(const Vec2D& point, const Color& color);
-
+	void Draw(const Line2D& line, const Color& color);
+	void Draw(const std::vector<Line2D>& lines, const Color& color);
 };
 #endif // !_Arcade_Game_Screen_H_
 

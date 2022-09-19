@@ -44,6 +44,7 @@ public:
 	Vec2D MidPoint() const;
 	float Slope() const;
 	float Lenght() const;
+	void Rotate(const float& angle, const Vec2D& arountPoint);
 };
 #endif // !_Arcade_Game_Line2D_H_
 
