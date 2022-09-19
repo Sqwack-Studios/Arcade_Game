@@ -76,4 +76,10 @@ void Star2D::Rotate(const float& angle, const Vec2D& aroundPoint)
 	}
 }
 
+void Star2D::Update(const int &deltaTime)
+{
+	if (mIsRotating)
+		Rotate(mRotationRate * deltaTime /1000,mCenter);
+}
+
 

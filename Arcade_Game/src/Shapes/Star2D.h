@@ -29,6 +29,8 @@ private:
 	int mOuterRadii;
 	int mInnerRadii;
 	int mNumSpikes;
+	bool mIsRotating = false;
+	float mRotationRate;
 
 	std::vector<Line2D> mLines;
 
@@ -44,6 +46,11 @@ public:
 
 	void Rotate(const float& angle, const Vec2D& aroundPoint);
 	std::vector<Line2D> SendToBuffer() const { return mLines; };
+
+	void SetIsRotating(const bool& isRotating) { mIsRotating = isRotating; };
+	inline bool GetIsRotating() const { return mIsRotating; };
+	void SetRotationRate(const float& RotRate) { mRotationRate = RotRate; };
+	void Update(const int &deltaTime);
 
 
 };
