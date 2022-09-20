@@ -25,6 +25,7 @@ private:
 protected:
 
 public:
+	static Color EvaluateMinueSourceAlpha(const Color& source, const Color& destination);
 
 	static const SDL_PixelFormat* mFormat;
 	static void InitColorFormat(const SDL_PixelFormat* format);
@@ -52,7 +53,7 @@ public:
 	void SetRGBA(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
 	void SetRed(uint8_t red);
-	void SetGren(uint8_t green);
+	void SetGreen(uint8_t green);
 	void SetBlue(uint8_t blue);
 	void SetAlpha(uint8_t alpha);
 

@@ -2,8 +2,13 @@
 #include "Vec2D.h"
 #include "SDL.h"
 #include <assert.h>
+#include <algorithm>
 #include <cmath>
 #include "Line2D.h"
+#include "Triangle.h"
+#include "AARectangle.h"
+#include "Circle.h"
+#include "Utils.h"
 
 Screen::Screen() : mWidth(0), mHeight(0), moptrWindow(nullptr), mnoptrWindowSurface(nullptr) {}
 
@@ -57,6 +62,103 @@ void Screen::ClearScreen()
 
 }
 
+void Screen::FillPoly(const std::vector<Vec2D>& points, const Color& color)
+{
+	if (points.size() > 0)
+	{
+		float top = points[0].GetY();
+		float bottom = points[0].GetY();
+		float right = points[0].GetX();
+		float left = points[0].GetX();
+
+		for (size_t i = 1; i < points.size(); ++i)
+		{
+			if (points[i].GetY() < top)
+			{
+				top = points[i].GetY();
+			}
+
+			if (points[i].GetY() > bottom)
+			{
+				bottom = points[i].GetY();
+			}
+
+			if (points[i].GetX() < left)
+			{
+				left = points[i].GetX();
+			}
+
+			if (points[i].GetX() > right)
+			{
+				right = points[i].GetX();
+			}
+		}
+
+		for (int pixelY = top; pixelY < bottom; ++pixelY)
+		{
+			std::vector<float> nodeXVec;
+
+			size_t j = points.size() - 1;
+
+			for (size_t i = 0; i < points.size(); ++i)
+			{
+				float pointiY = points[i].GetY();
+				float pointjY = points[j].GetY();
+
+				
+				if ((IsLessThanOrEqual(pointiY, pixelY) && pointjY > (float)pixelY) || (IsLessThanOrEqual(pointjY, pixelY) && pointiY > (float)pixelY))
+				{
+					float denom = pointjY - pointiY;
+					if (IsEqual(denom, 0))
+					{
+						continue;
+					}
+
+					float x = points[i].GetX() + (pixelY - pointiY) / (denom) * (points[j].GetX() - points[i].GetX());
+ 					nodeXVec.push_back(x);
+				}
+
+				j = i;
+			}
+
+			std::sort(nodeXVec.begin(), nodeXVec.end(), std::less<>());
+
+			for (size_t k = 0; k < nodeXVec.size(); k += 2)
+			{
+				if (nodeXVec[k] > right)
+				{
+					break;
+				}
+
+				if (nodeXVec[k + 1] > left)
+				{
+					if (nodeXVec[k] < left)
+					{
+						nodeXVec[k] = left;
+					}
+					if (nodeXVec[k + 1] > right)
+					{
+						nodeXVec[k + 1] = right;
+					}
+
+					//Line2D line = {Vec2D(nodeXVec[k], pixelY), Vec2D(nodeXVec[k+1], pixelY)};
+					//Draw(line, color);
+					for (int pixelX = nodeXVec[k]; pixelX < nodeXVec[k + 1]; ++pixelX)
+					{
+						
+						Draw(pixelX, pixelY, color);
+					}
+				}
+			}
+		}
+
+
+
+
+	}
+}
+
+
 void Screen::SwapScreen()
 {
 	assert(moptrWindow);
@@ -87,7 +189,9 @@ void Screen::Draw(const Vec2D& point, const Color& color)
 	if (!moptrWindow)
 		return;
 
-	mBackBuffer.SetPixel(color, point.GetX(), point.GetY());
+	int x = std::roundf(point.GetX());
+	int y = std::roundf(point.GetY());
+	mBackBuffer.SetPixel(color, x, y);
 }
 
 void Screen::Draw(const Line2D& line, const Color& color)
@@ -157,6 +261,93 @@ void Screen::Draw(const Line2D& line, const Color& color)
 
 void Screen::Draw(const std::vector<Line2D>& lines, const Color& color)
 {
+	for (const Line2D& line : lines)
+	{
+		Draw(line, color);
+	}
+}
+
+void Screen::Draw(const Triangle& triangle, const Color& color, bool fill, const Color& fillColor)
+{
+	if (fill)
+	{
+		FillPoly(triangle.GetPoints(), fillColor);
+	}
+	Line2D p0p1(triangle.GetP0(), triangle.GetP1());
+	Line2D p1p2(triangle.GetP1(), triangle.GetP2());
+	Line2D p2p0(triangle.GetP2(), triangle.GetP0());
+
+	Draw(p0p1, color);
+	Draw(p1p2, color);
+	Draw(p2p0, color);
+
+
+}
+
+void Screen::Draw(const AARectangle& rect, const Color& color, bool fill, const Color& fillColor)
+{
+	std::vector<Vec2D> points(rect.GetPoints());
+
+	if (fill)
+	{
+		FillPoly(points, fillColor);
+	}
+
+	Line2D p0p1(points[0], points[1]);
+	Line2D p1p2(points[1], points[2]);
+	Line2D p2p3(points[2], points[3]);
+	Line2D p3p0(points[3], points[0]);
+
+	Draw(p0p1, color);
+	Draw(p1p2, color);
+	Draw(p2p3, color);
+	Draw(p3p0, color);
+
+
+}
+
+void Screen::Draw(const Circle& circle, const Color& color, bool fill, const Color& fillColor)
+{
+	std::vector<Vec2D> circlePoints;
+	std::vector<Line2D> lines;
+
+	Vec2D p0 = Vec2D(circle.GetCenterPoint().GetX() + circle.GetRadius(), circle.GetCenterPoint().GetY() + circle.GetRadius());
+	Vec2D p1(p0);
+	float step = TWO_PI / NUM_CIRCLE_SEGMENTS;
+	Line2D nextLineToDraw;
+	bool withinX;
+	bool withinY;
+	bool skipNext{ false };
+
+	for (unsigned int i = 0; i < NUM_CIRCLE_SEGMENTS; i++)
+	{
+		p1.Rotate(step, circle.GetCenterPoint());
+
+		withinX = IsGreaterThanOrEqual(p1.GetX(), 0.f) && IsLessThanOrEqual(p1.GetX(), (float)SCREEN_WIDTH);
+		withinY = IsGreaterThanOrEqual(p1.GetY(), 0.f) && IsLessThanOrEqual(p1.GetY(), (float)SCREEN_HEIGHT);
+		 
+		if (withinX && withinY)
+		{
+			nextLineToDraw.SetP0(p0);
+			nextLineToDraw.SetP1(p1);
+
+			if (!skipNext)
+			{
+				lines.push_back(nextLineToDraw);
+				circlePoints.push_back(p0);
+			}
+			p0 = p1;
+			skipNext = false;
+
+		}
+		else
+			skipNext = true;
+	}
+
+	if (fill)
+		FillPoly(circlePoints, fillColor);
+
+
 	for (const Line2D& line : lines)
 	{
 		Draw(line, color);

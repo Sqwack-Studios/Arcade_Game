@@ -78,14 +78,18 @@ size_t ScreenBuffer::GetIndex(int r, int c)
 void ScreenBuffer::SetPixel(const Color& color, int x, int y)
 {
 	assert(mSurface);
-	if(mSurface && (y < mSurface->h) && (y >= 0) && (x < mSurface->w) && (x >= 0))
-	SDL_LockSurface(mSurface);
+	if (mSurface && (y < mSurface->h) && (y >= 0) && (x < mSurface->w) && (x >= 0))
+	{
+		SDL_LockSurface(mSurface);
 
-	uint32_t* pixels = (uint32_t*)mSurface->pixels;
+		uint32_t* pixels = (uint32_t*)mSurface->pixels;
 
-	size_t index = GetIndex(y, x);
+		size_t index = GetIndex(y, x);
 
-	pixels[index] = color.GetPixelColor();
+		//pixels[index] = color.GetPixelColor();
+		Color surfaceColor = Color(pixels[index]); //destination color
+		pixels[index] = Color::EvaluateMinueSourceAlpha(color, surfaceColor).GetPixelColor();
 
-	SDL_UnlockSurface(mSurface);
+		SDL_UnlockSurface(mSurface);
+	}
 }
