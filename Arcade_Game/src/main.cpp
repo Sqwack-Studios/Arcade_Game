@@ -19,7 +19,7 @@
 #include "Line2D.h"
 #include "Star2D.h"
 #include "Utils.h"
-
+#include "Triangle.h"
 
 
 const int SCREEN_WIDTH = 250;
@@ -50,11 +50,19 @@ int main(int arg, char *argv[])
 	star2.SetRotationRate(-2 * PI * 20 / 360);
 	star3.SetRotationRate(-2 * PI * 40 / 360);
 
+	Vec2D vert1(Vec2D::Zero);
+	Vec2D vert2(0,10);
+	Vec2D vert3(5,0);
+	Vec2D point(4, 0);
+	Triangle cipoteAlado(vert1, vert2, vert3);
+	std::cout << cipoteAlado.Area() << std::endl;
+	std::cout << std::boolalpha << cipoteAlado.ContainsPoint(point) << std::endl;
 
-
-
-
-
+	theScreen.Draw(vert3, Color::Red());
+	theScreen.Draw(vert1, Color::Red());
+	theScreen.Draw(vert2, Color::Red());
+	theScreen.Draw(point, Color::Green());
+	theScreen.SwapScreen();
 	SDL_Event sdlEvent;
 	bool running = true;
 
@@ -67,11 +75,11 @@ int main(int arg, char *argv[])
 		star2.Update(deltaTime);
 		star3.Update(deltaTime);
 
-		theScreen.Draw(star.SendToBuffer(), Color::Red());
-		theScreen.Draw(star2.SendToBuffer(), Color::Blue());
-		theScreen.Draw(star3.SendToBuffer(), Color::Green());
+		//theScreen.Draw(star.SendToBuffer(), Color::Red());
+		//theScreen.Draw(star2.SendToBuffer(), Color::Blue());
+		//theScreen.Draw(star3.SendToBuffer(), Color::Green());
 
-		theScreen.SwapScreen();
+		
 
 		while (SDL_PollEvent(&sdlEvent))
 		{

@@ -54,6 +54,7 @@ public:
 
 	float Distance(const Vec2D& vec) const;
 	float Dot(const Vec2D& vec) const;
+	float Cross(const Vec2D& vec) const;
 	Vec2D ProjectOnto(const Vec2D& vec2) const;
 	float AngleBetween(const Vec2D& vec2) const;
 

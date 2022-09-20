@@ -164,8 +164,12 @@
     <ClCompile Include="src\Graphics\Color.cpp" />
     <ClCompile Include="src\Graphics\Screen.cpp" />
     <ClCompile Include="src\Graphics\ScreenBuffer.cpp" />
+    <ClCompile Include="src\Shapes\AARectangle.cpp" />
+    <ClCompile Include="src\Shapes\Circle.cpp" />
     <ClCompile Include="src\Shapes\Line2D.cpp" />
+    <ClCompile Include="src\Shapes\Shape.cpp" />
     <ClCompile Include="src\Shapes\Star2D.cpp" />
+    <ClCompile Include="src\Shapes\Triangle.cpp" />
     <ClCompile Include="src\Utils\DynamicIntArray.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Utils\Utils.cpp" />
@@ -184,11 +188,27 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="src\Shapes\AARectangle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Shapes\Circle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\Shapes\Line2D.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="src\Shapes\Shape.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\Shapes\Star2D.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Shapes\Triangle.h">
       <SubType>
       </SubType>
     </ClInclude>
