@@ -54,14 +54,14 @@ int main(int arg, char *argv[])
 
 	Vec2D vert1(Vec2D::CentreScreen());
 	Vec2D vert2(170, 125);
-	Vec2D vert3(140,50);
+	Vec2D vert3(140,-50);
 
 	Triangle cipoteAlado(vert1, vert2, vert3);
 	AARectangle rect(vert3, 100, 50);
-	Circle circle(Vec2D::CentreScreen(), 80);
+	Circle circle(Vec2D::CentreScreen(), 90);
 	theScreen.Draw(circle, Color::Green(), true);
 	theScreen.Draw(rect, Color(0, 255, 0, 150), true, Color(0, 255, 0, 150));
-	/*theScreen.Draw(cipoteAlado, Color::Red(), true);*/
+	theScreen.Draw(cipoteAlado, Color::Red(), true, Color::Pink());
 	//theScreen.Draw(star.SendToBuffer(), Color::Red());
 	theScreen.SwapScreen();
 	SDL_Event sdlEvent;

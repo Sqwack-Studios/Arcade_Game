@@ -317,7 +317,7 @@ void Screen::Draw(const Circle& circle, const Color& color, bool fill, const Col
 	Line2D nextLineToDraw;
 	bool withinX;
 	bool withinY;
-	bool skipNext{ false };
+
 
 	for (unsigned int i = 0; i < NUM_CIRCLE_SEGMENTS; i++)
 	{
@@ -325,23 +325,17 @@ void Screen::Draw(const Circle& circle, const Color& color, bool fill, const Col
 
 		withinX = IsGreaterThanOrEqual(p1.GetX(), 0.f) && IsLessThanOrEqual(p1.GetX(), (float)SCREEN_WIDTH);
 		withinY = IsGreaterThanOrEqual(p1.GetY(), 0.f) && IsLessThanOrEqual(p1.GetY(), (float)SCREEN_HEIGHT);
-		 
+
 		if (withinX && withinY)
 		{
 			nextLineToDraw.SetP0(p0);
 			nextLineToDraw.SetP1(p1);
 
-			if (!skipNext)
-			{
-				lines.push_back(nextLineToDraw);
-				circlePoints.push_back(p0);
-			}
-			p0 = p1;
-			skipNext = false;
+			lines.push_back(nextLineToDraw);
+			circlePoints.push_back(p0);
 
+			p0 = p1;
 		}
-		else
-			skipNext = true;
 	}
 
 	if (fill)
