@@ -33,6 +33,8 @@ ScreenBuffer& ScreenBuffer::operator=(ScreenBuffer&& otherArray) noexcept
 
 	mSurface = otherArray.mSurface;
 
+	otherArray.mSurface = nullptr;
+
 	return *this;
 }
 

@@ -54,6 +54,9 @@
     <ClCompile Include="src\Shapes\Circle.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\App\App.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Utils\Vec2D.h">
@@ -90,6 +93,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\Shapes\Circle.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\App\App.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

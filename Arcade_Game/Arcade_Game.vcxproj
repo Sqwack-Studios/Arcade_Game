@@ -131,7 +131,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,7 +149,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\App\App.cpp" />
     <ClCompile Include="src\Graphics\Color.cpp" />
     <ClCompile Include="src\Graphics\Screen.cpp" />
     <ClCompile Include="src\Graphics\ScreenBuffer.cpp" />
@@ -176,6 +177,10 @@
     <ClCompile Include="src\Utils\Vec2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\App\App.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\Graphics\Color.h">
       <SubType>
       </SubType>
