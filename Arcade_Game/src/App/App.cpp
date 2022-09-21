@@ -1,15 +1,9 @@
 #include "App.h"
 #include <SDL.h>
+#include <assert.h>
+#include "ArcadeScene.h"
 
-#include "Vec2D.h"
-#include "Line2D.h"
-#include "Color.h"
-#include "Utils.h"
 
-#include "Triangle.h"
-#include "AARectangle.h"
-#include "Circle.h"
-#include "Star2D.h"
 
 
 App& App::Singleton()
@@ -22,6 +16,10 @@ bool App::Init(uint32_t width, uint32_t height, uint32_t mag)
 {
     mnoptrWindow = mScreen.Init(width, height, mag);
 
+	std::unique_ptr<ArcadeScene> arcadeScene{ std::make_unique<ArcadeScene>() };
+
+	PushScene(std::move(arcadeScene));
+
     return mnoptrWindow != nullptr;
 }
 
@@ -29,11 +27,6 @@ void App::Run()
 {
 	if (!mnoptrWindow)
 		return;
-
-	Star2D star(Vec2D::CentreScreen(), 60, 30, 5, 0.0f);
-	star.SetIsRotating(true);
-	star.SetRotationRate(-2 * PI * 120 / 360);
-
 
 	SDL_Event sdlEvent;
 	bool running = true;
@@ -43,6 +36,8 @@ void App::Run()
 
 	uint32_t deltaTime{ 10 };
 	uint32_t accumulator{ 0 };
+
+	
 
 	while (running)
 	{
@@ -69,20 +64,62 @@ void App::Run()
 			}
 		}
 
-		//Update state
-		while (accumulator >= deltaTime)
+		Scene* topScene = App::TopScene();
+
+		assert(topScene && "Why dont we have a scene?");
+
+		if (topScene)
 		{
-			//update current scene by deltaTime
-			star.Update(deltaTime);
+			//Update state
+			while (accumulator >= deltaTime)
+			{
+				//update current scene by deltaTime
+				/*star.Update(deltaTime);*/
+				topScene->Update(deltaTime);
+				accumulator -= deltaTime;
+			}
 
-			accumulator -= deltaTime;
+			//Render
+
+			topScene->Draw(mScreen);
 		}
-
-		//Render
-
-		mScreen.Draw(star.SendToBuffer(), Color::Blue());
-		mScreen.SwapScreen();
+		
+		
+		
 	}
 
 	mScreen.~Screen();
+}
+
+void App::PushScene(std::unique_ptr<Scene> scene)
+{
+	assert(scene && "Dont push nullptr");
+	if (scene)
+	{
+		scene->Init();
+		mSceneStack.emplace_back(std::move(scene));
+		SDL_SetWindowTitle(mnoptrWindow, TopScene()->GetSceneName().c_str());
+	}
+
+}
+
+void App::PopScene()
+{
+	if (mSceneStack.size() > 1)
+	{
+		mSceneStack.pop_back();
+	}
+	if (TopScene())
+	{
+		SDL_SetWindowTitle(mnoptrWindow, TopScene()->GetSceneName().c_str());
+	}
+	
+}
+
+Scene* App::TopScene()
+{
+	if(mSceneStack.empty())
+		return nullptr;
+
+	return mSceneStack.back().get();
 }

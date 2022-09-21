@@ -1,5 +1,4 @@
 #include "Star2D.h"
-#include "Line2D.h"
 #include "Utils.h"
 
 

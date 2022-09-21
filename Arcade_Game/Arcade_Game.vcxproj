@@ -165,6 +165,7 @@
     <ClCompile Include="src\Graphics\Color.cpp" />
     <ClCompile Include="src\Graphics\Screen.cpp" />
     <ClCompile Include="src\Graphics\ScreenBuffer.cpp" />
+    <ClCompile Include="src\Scenes\ArcadeScene.cpp" />
     <ClCompile Include="src\Shapes\AARectangle.cpp" />
     <ClCompile Include="src\Shapes\Circle.cpp" />
     <ClCompile Include="src\Shapes\Line2D.cpp" />
@@ -190,6 +191,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\Graphics\ScreenBuffer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\ArcadeScene.h">
       <SubType>
       </SubType>
     </ClInclude>

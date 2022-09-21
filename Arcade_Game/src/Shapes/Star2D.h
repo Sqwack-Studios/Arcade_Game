@@ -13,9 +13,9 @@
 
 #pragma once
 #include "Vec2D.h"
+#include "Line2D.h"
 #include <vector>
 
-class Line2D;
 
 class Star2D
 {

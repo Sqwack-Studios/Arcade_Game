@@ -14,8 +14,11 @@
 #pragma once
 #include "Screen.h"
 #include <stdint.h>
+#include <vector>
+#include <memory>
 
 struct SDL_Window;
+class Scene;
 
 class App
 {
@@ -23,8 +26,7 @@ private:
 	Screen mScreen;
 	SDL_Window* mnoptrWindow; //Screen owns it
 
-	uint32_t mWidth;
-	uint32_t mHeight;
+	std::vector<std::unique_ptr<Scene>> mSceneStack; //maybe use an actual stack instead of a vector
 
 protected:
 
@@ -33,8 +35,12 @@ public:
 	bool Init(uint32_t width, uint32_t height, uint32_t mag);
 	void Run();
 
-	inline uint32_t Width() const { return mWidth; }
-	inline uint32_t Height() const { return mHeight; }
+	inline uint32_t Width() const { return mScreen.Width(); }
+	inline uint32_t Height() const { return mScreen.Height(); }
+
+	void PushScene(std::unique_ptr<Scene> scene); //move semantic function, take ownership of the scene
+	void PopScene();
+	Scene* TopScene(); //current Scene
 };
 #endif // !_Arcade_Game_App_H_
 
