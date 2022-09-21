@@ -28,9 +28,11 @@ public:
 
 	DynamicIntArray();
 	DynamicIntArray(const DynamicIntArray& otherArray);
+	DynamicIntArray(DynamicIntArray&& otherArray) noexcept;
 	~DynamicIntArray();
 
 	DynamicIntArray& operator=(const DynamicIntArray& otherArray);
+	DynamicIntArray& operator=(DynamicIntArray&& otherArray) noexcept;
 
 	inline int Size() const { return mSize; }
 	inline int Capacity() const { return mCapacity; }
@@ -45,6 +47,9 @@ public:
 
 	bool PushBack(int newVal);
 	bool PopBack(int& value);
+
+
+	void Display();
 
 	const int& operator[](int index) const;
 	int& operator[](int index);

@@ -17,6 +17,16 @@ DynamicIntArray::DynamicIntArray(const DynamicIntArray& otherArray)
 	Copy(otherArray);
 }
 
+DynamicIntArray::DynamicIntArray(DynamicIntArray&& otherArray) noexcept :
+	moptrData(otherArray.moptrData),
+	mSize(otherArray.mSize),
+	mCapacity(otherArray.mCapacity)
+{
+	otherArray.moptrData = nullptr;
+	otherArray.mSize = 0;
+	otherArray.mCapacity = 0;
+}
+
 DynamicIntArray::~DynamicIntArray()
 {
 	if(moptrData != nullptr)
@@ -48,6 +58,23 @@ DynamicIntArray& DynamicIntArray::operator=(const DynamicIntArray& otherArray)
 	Copy(otherArray);
 
 	return *this;
+}
+
+DynamicIntArray& DynamicIntArray::operator=(DynamicIntArray&& otherArray) noexcept
+{
+	if (this == &otherArray)
+	{
+		return *this;
+	}
+
+	delete[] moptrData;
+
+	moptrData = otherArray.moptrData;
+	mSize = otherArray.mSize;
+	mCapacity = otherArray.mCapacity;
+
+	return *this;
+
 }
 
 
@@ -161,6 +188,23 @@ bool DynamicIntArray::PopBack(int& value)
 		return true;
 	}
 	return false;
+}
+
+
+
+void DynamicIntArray::Display()
+{
+	if (moptrData)
+	{
+		std::cout << "---------------------------------------" << std::endl;
+		std::cout << "Capacity: " << mCapacity << std::endl;
+		std::cout << "Size: " << mSize << std::endl;
+		for (size_t i = 0; i < mSize; i++)
+		{
+			std::cout << "val[" << i << "]: " << operator[](i) << std::endl;
+		}
+		std::cout << "---------------------------------------" << std::endl;
+	}
 }
 
 const int& DynamicIntArray::operator[](int index) const

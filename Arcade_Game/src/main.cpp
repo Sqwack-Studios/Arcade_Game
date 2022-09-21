@@ -13,7 +13,7 @@
 #include <iostream>
 #include <SDL.h>
 
-
+#include "DynamicIntArray.h"
 #include "Color.h"
 #include "Screen.h"
 #include "Line2D.h"
@@ -30,9 +30,33 @@ const int MAGNIFICATION = 3;
 int deltaTime = 0;
 int currentTime = 0;
 
+void Consume(DynamicIntArray movedArray)
+{
+	std::cout << "---------------------------------------" << std::endl;
+	std::cout << "Moved array : " << std::endl;
+	movedArray.Display();
+
+	std::cout << "---------------------------------------" << std::endl;
+}
 
 int main(int arg, char *argv[])
 {	
+	///DynamicArray TESTS
+
+	//DynamicIntArray arrayB;
+	//arrayB.Init();
+	//int length = arrayB.Capacity() * 2;
+	//
+	//for (size_t i = 0; i < length; i++)
+	//{
+	//	arrayB.PushBack(i);
+	//}
+	//arrayB.Display();
+
+	//Consume(std::move(arrayB));
+
+	//arrayB.Display();
+	/// 
 
 	Screen theScreen;
 	theScreen.Init(SCREEN_WIDTH, SCREEN_HEIGHT, MAGNIFICATION);
