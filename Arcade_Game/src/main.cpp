@@ -41,24 +41,24 @@ int main(int arg, char *argv[])
 
 	///DynamicArray MOVE SEMANTIC TESTS
 
-	DynamicIntArray arrayA;
-	DynamicIntArray arrayB;
-	arrayB.Init();
-	std::cout << arrayB.Capacity();
-	int length = arrayB.Capacity() * 2;
-	
-	for (size_t i = 0; i < length; i++)
-	{
-		arrayB.PushBack(i);
-	}
-	arrayB.Display();
+	//DynamicIntArray arrayA;
+	//DynamicIntArray arrayB;
+	//arrayB.Init();
+	//std::cout << arrayB.Capacity();
+	//int length = arrayB.Capacity() * 2;
+	//
+	//for (size_t i = 0; i < length; i++)
+	//{
+	//	arrayB.PushBack(i);
+	//}
+	//arrayB.Display();
 
-	//Consume(std::move(arrayB));
-	arrayA = std::move(arrayB);
+	////Consume(std::move(arrayB));
+	//arrayA = std::move(arrayB);
 
-	arrayA.Display();
-	std::cout << "hehe";
-	arrayB.Display();
+	//arrayA.Display();
+	//std::cout << "hehe";
+	//arrayB.Display();
 	 
 	///
 
