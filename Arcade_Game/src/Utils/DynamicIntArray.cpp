@@ -12,7 +12,8 @@ DynamicIntArray::DynamicIntArray() :
 
 }
 
-DynamicIntArray::DynamicIntArray(const DynamicIntArray& otherArray)
+DynamicIntArray::DynamicIntArray(const DynamicIntArray& otherArray):
+	moptrData(nullptr)
 {
 	Copy(otherArray);
 }
@@ -37,7 +38,9 @@ DynamicIntArray::~DynamicIntArray()
 
 void DynamicIntArray::Copy(const DynamicIntArray& otherArray)
 {
+
 	bool result = Init(otherArray.mCapacity);
+
 	assert(result);
 
 	mSize = otherArray.mSize;
@@ -73,6 +76,10 @@ DynamicIntArray& DynamicIntArray::operator=(DynamicIntArray&& otherArray) noexce
 	mSize = otherArray.mSize;
 	mCapacity = otherArray.mCapacity;
 
+	otherArray.moptrData = nullptr;
+	otherArray.mSize = 0;
+	otherArray.mCapacity = 0;
+
 	return *this;
 
 }
@@ -80,22 +87,32 @@ DynamicIntArray& DynamicIntArray::operator=(DynamicIntArray&& otherArray) noexce
 
 bool DynamicIntArray::Init(const int& capacity)
 {
+	
 	if (capacity == 0)
+	{
+
 		return false;
+	}
 
 	if (mCapacity == capacity)
+	{
+
 		return true;
+	}
+		
 
 	if (moptrData)
 	{
+		std::cout << "hola1";
 		delete[] moptrData;
+		std::cout << "hola2";
 		moptrData = nullptr;
 		mCapacity = 0;
 		mSize = 0;
 	}
 
 	moptrData = new int[capacity];
-
+	
 	if (!moptrData)
 		return false;
 

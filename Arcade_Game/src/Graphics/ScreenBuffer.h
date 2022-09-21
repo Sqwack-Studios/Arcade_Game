@@ -24,12 +24,15 @@ private:
 	size_t GetIndex(int r, int c);
 
 	void CopyBuffer(const ScreenBuffer& screenBuffer);
+
 protected:
 
 public:
 	ScreenBuffer();
 	ScreenBuffer(const ScreenBuffer& screenBuffer);
 	~ScreenBuffer();
+	ScreenBuffer(ScreenBuffer&& otherScreenBuffer) noexcept;
+	ScreenBuffer& operator=(ScreenBuffer&& otherArray) noexcept;
 
 	ScreenBuffer& operator=(const ScreenBuffer& screenBuffer);
 
@@ -40,6 +43,8 @@ public:
 	void Clear(const Color& color = Color::Black());
 
 	void SetPixel(const Color& color, int x, int y);
+
+	
 };
 #endif // !_Arcade_Game_ScreenBuffer_H_
 

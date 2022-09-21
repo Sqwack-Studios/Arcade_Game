@@ -41,22 +41,28 @@ void Consume(DynamicIntArray movedArray)
 
 int main(int arg, char *argv[])
 {	
-	///DynamicArray TESTS
+	///DynamicArray MOVE SEMANTIC TESTS
 
-	//DynamicIntArray arrayB;
-	//arrayB.Init();
-	//int length = arrayB.Capacity() * 2;
-	//
-	//for (size_t i = 0; i < length; i++)
-	//{
-	//	arrayB.PushBack(i);
-	//}
-	//arrayB.Display();
+	DynamicIntArray arrayA;
+	DynamicIntArray arrayB;
+	arrayB.Init();
+	std::cout << arrayB.Capacity();
+	int length = arrayB.Capacity() * 2;
+	
+	for (size_t i = 0; i < length; i++)
+	{
+		arrayB.PushBack(i);
+	}
+	arrayB.Display();
 
 	//Consume(std::move(arrayB));
+	arrayA = std::move(arrayB);
 
-	//arrayB.Display();
-	/// 
+	arrayA.Display();
+	std::cout << "hehe";
+	arrayB.Display();
+	 
+	///
 
 	Screen theScreen;
 	theScreen.Init(SCREEN_WIDTH, SCREEN_HEIGHT, MAGNIFICATION);

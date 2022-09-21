@@ -18,6 +18,24 @@ ScreenBuffer::~ScreenBuffer()
 	}
 }
 
+ScreenBuffer::ScreenBuffer(ScreenBuffer&& otherScreenBuffer) noexcept:
+	mSurface(otherScreenBuffer.mSurface)
+{
+	otherScreenBuffer.mSurface = nullptr;
+}
+
+ScreenBuffer& ScreenBuffer::operator=(ScreenBuffer&& otherArray) noexcept
+{
+	if (this == &otherArray)
+		return *this;
+
+	delete mSurface;
+
+	mSurface = otherArray.mSurface;
+
+	return *this;
+}
+
 void ScreenBuffer::CopyBuffer(const ScreenBuffer& screenBuffer)
 {
 	mSurface = SDL_CreateRGBSurfaceWithFormat(
@@ -29,6 +47,8 @@ void ScreenBuffer::CopyBuffer(const ScreenBuffer& screenBuffer)
 
 	SDL_BlitSurface(screenBuffer.mSurface, nullptr, mSurface, nullptr);
 }
+
+
 
 ScreenBuffer& ScreenBuffer::operator=(const ScreenBuffer& screenBuffer)
 {
