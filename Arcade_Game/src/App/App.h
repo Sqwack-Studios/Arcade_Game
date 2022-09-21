@@ -26,7 +26,7 @@ private:
 	Screen mScreen;
 	SDL_Window* mnoptrWindow; //Screen owns it
 
-	std::vector<std::unique_ptr<Scene>> mSceneStack; //maybe use an actual stack instead of a vector
+	std::vector<std::unique_ptr<Scene>> mSceneStack;
 
 protected:
 
