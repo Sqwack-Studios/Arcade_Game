@@ -166,6 +166,7 @@
     <ClCompile Include="src\Graphics\Screen.cpp" />
     <ClCompile Include="src\Graphics\ScreenBuffer.cpp" />
     <ClCompile Include="src\Input\GameController.cpp" />
+    <ClCompile Include="src\Input\InputController.cpp" />
     <ClCompile Include="src\Scenes\ArcadeScene.cpp" />
     <ClCompile Include="src\Shapes\AARectangle.cpp" />
     <ClCompile Include="src\Shapes\Circle.cpp" />
@@ -200,6 +201,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\Input\InputAction.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Input\InputController.h">
       <SubType>
       </SubType>
     </ClInclude>

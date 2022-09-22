@@ -18,7 +18,10 @@
 class GameController
 {
 private:
-	std::vector<ButtonAction> mButtonAction;
+	std::vector<ButtonAction> mButtonActions;
+	std::vector<MouseButtonAction> mMouseButtonActions;
+
+	MouseMovedAction mMouseMovedAction;
 protected:
 
 public:
@@ -37,6 +40,16 @@ public:
 	static InputKey RightKey();
 	static InputKey UpKey();
 	static InputKey DownKey();
+
+	inline const MouseMovedAction& GetMouseMovedAction() { return mMouseMovedAction; }
+	inline void SetMouseMovedAction(const MouseMovedAction& mouseMovedAction) { mMouseMovedAction = mouseMovedAction; }
+
+	MouseInputAction GetMouseButtonActionForMouseButton(MouseButton button);
+	void AddMouseButtonAction(const MouseButtonAction& mouseButtonAction);
+
+	static MouseButton LeftMouseButton();
+	static MouseButton RightMouseButton();
+
 };
 #endif // !_Arcade_Game_GameController_H_
 

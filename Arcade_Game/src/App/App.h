@@ -16,6 +16,7 @@
 #include <stdint.h>
 #include <vector>
 #include <memory>
+#include "InputController.h"
 
 struct SDL_Window;
 class Scene;
@@ -27,6 +28,8 @@ private:
 	SDL_Window* mnoptrWindow; //Screen owns it
 
 	std::vector<std::unique_ptr<Scene>> mSceneStack;
+
+	InputController mInputController;
 
 protected:
 

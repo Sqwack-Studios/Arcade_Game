@@ -6,6 +6,7 @@
 
 
 
+
 App& App::Singleton()
 {
     static App theApp;
@@ -28,7 +29,7 @@ void App::Run()
 	if (!mnoptrWindow)
 		return;
 
-	SDL_Event sdlEvent;
+
 	bool running = true;
 
 	uint32_t lastTick{ SDL_GetTicks() };
@@ -37,6 +38,7 @@ void App::Run()
 	uint32_t deltaTime{ 10 };
 	uint32_t accumulator{ 0 };
 
+	mInputController.Init([&running](uint32_t deltaTime, InputState state) { running = false; });
 	
 
 	while (running)
@@ -54,15 +56,8 @@ void App::Run()
 
 
 		//Input
-		while (SDL_PollEvent(&sdlEvent))
-		{
-			switch (sdlEvent.type)
-			{
-			case SDL_QUIT:
-				running = false;
-				break;
-			}
-		}
+		mInputController.Update(deltaTime);
+
 
 		Scene* topScene = App::TopScene();
 
@@ -97,6 +92,9 @@ void App::PushScene(std::unique_ptr<Scene> scene)
 	if (scene)
 	{
 		scene->Init();
+
+		mInputController.SetGameController(scene->GetGameController());
+
 		mSceneStack.emplace_back(std::move(scene));
 		SDL_SetWindowTitle(mnoptrWindow, TopScene()->GetSceneName().c_str());
 	}
@@ -111,6 +109,7 @@ void App::PopScene()
 	}
 	if (TopScene())
 	{
+		mInputController.SetGameController(TopScene()->GetGameController());
 		SDL_SetWindowTitle(mnoptrWindow, TopScene()->GetSceneName().c_str());
 	}
 	
