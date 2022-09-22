@@ -49,7 +49,7 @@ protected:
 
 public:
 	void AddCommand(const Command& command);
-	void LoadFile(const std::string& filePath);
+	bool LoadFile(const std::string& filePath);
 
 	static Color ReadColor(const ParseFuncParams& params);
 	static Vec2D ReadSize(const ParseFuncParams& params);
