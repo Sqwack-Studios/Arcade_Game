@@ -162,6 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\App\App.cpp" />
+    <ClCompile Include="src\Games\BreakOut.cpp" />
     <ClCompile Include="src\Graphics\Color.cpp" />
     <ClCompile Include="src\Graphics\Screen.cpp" />
     <ClCompile Include="src\Graphics\ScreenBuffer.cpp" />
@@ -183,6 +184,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App\App.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Games\BreakOut.h">
       <SubType>
       </SubType>
     </ClInclude>
