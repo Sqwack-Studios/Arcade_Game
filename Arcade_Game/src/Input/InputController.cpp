@@ -2,6 +2,7 @@
 #include "GameController.h"
 #include <SDL.h>
 
+
 InputController::InputController(): 
 	mnoptrCurrentController(nullptr),
 	mQuit(nullptr)

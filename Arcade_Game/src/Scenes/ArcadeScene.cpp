@@ -53,7 +53,6 @@ void ArcadeScene::Draw(Screen& theScreen)
 	star.SetRotationRate(-2 * PI * 120 / 360);
 	theScreen.Draw(star.SendToBuffer(), Color::Blue());
 
-	theScreen.SwapScreen();
 }
 
 void ArcadeScene::Update(uint32_t deltaTime)

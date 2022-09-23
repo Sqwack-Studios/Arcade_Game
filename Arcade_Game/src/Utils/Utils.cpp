@@ -20,5 +20,5 @@ bool IsLessThanOrEqual(float x, float y)
 
 float MillisecondsToSeconds(unsigned int milliseconds)
 {
-	return static_cast<float>(milliseconds) * 1000.f;
+	return static_cast<float>(milliseconds) / 1000.f;
 }

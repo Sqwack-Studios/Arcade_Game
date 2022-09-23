@@ -1,6 +1,7 @@
 #include "GameController.h"
 #include <SDL.h>
 
+
 GameController::GameController(): mMouseMovedAction(nullptr)
 {
 }
@@ -9,12 +10,15 @@ InputAction GameController::GetActionForKey(InputKey key)
 {
     for (const ButtonAction& buttonAction : mButtonActions)
     {
+
         if (buttonAction.key == key  )
         {
+
             return buttonAction.action;
         }
     }
     //return "nothing" if the key is not found 
+
     return [](uint32_t, InputState) {};
 }
 

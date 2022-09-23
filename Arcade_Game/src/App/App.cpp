@@ -82,7 +82,6 @@ void App::Run()
 			while (accumulator >= deltaTime)
 			{
 				//update current scene by deltaTime
-				/*star.Update(deltaTime);*/
 				topScene->Update(deltaTime);
 				accumulator -= deltaTime;
 			}
@@ -90,8 +89,10 @@ void App::Run()
 			//Render
 
 			topScene->Draw(mScreen);
+			
+			
 		}
-		
+		mScreen.SwapScreen();
 		
 		
 	}
