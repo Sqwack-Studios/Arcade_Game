@@ -114,8 +114,10 @@ void BreakOut::ResetGame()
         static_cast<unsigned int>(SCREEN_HEIGHT)
     };
 
+
+    mLevelBoundary = { levelBoundary };
+
     mPaddle.Init(paddleRect, levelBoundary);
     mBall.MoveTo(Vec2D::CentreScreen());
-    std::cout << mBall.GetPosition();
-    mBall.MoveTo(Vec2D::CentreScreen());
+    mBall.SetVelocity(INITIAL_BALL_VEL);
 }

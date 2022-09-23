@@ -30,7 +30,6 @@ struct ButtonAction
 };
 
 
-
 struct MousePosition
 {
 	int32_t xPos, yPos;

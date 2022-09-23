@@ -40,7 +40,9 @@ public:
 	inline void Stop() { mVelocity = Vec2D::Zero; }
 	void MoveTo(const Vec2D& point);
 	
-	inline const AARectangle GetBoundingBox() const { return mBoundaryBox; }
+	void Bounce(const BoundaryEdge& edge);
+
+	inline const AARectangle GetBoundaryBox() const { return mBoundaryBox; }
 	inline void SetVelocity(const Vec2D& vel) { mVelocity = vel; }
 	inline Vec2D GetVelocity() const { return mVelocity; }
 	inline float GetRadius() const { return mBoundaryBox.GetWidth() / 2.0; }

@@ -32,7 +32,7 @@ void Ball::MakeFlushWithEdge(const BoundaryEdge& edge, Vec2D& pointOnEdge, bool 
 	if (edge.normal == Vec2D::Down)
 	{
 		mBoundaryBox.MoveTo(
-			Vec2D(mBoundaryBox.GetTopLeftPoint().GetX(), edge.edge.GetP0().GetY() + mBoundaryBox.GetHeight()));
+			Vec2D(mBoundaryBox.GetTopLeftPoint().GetX(), edge.edge.GetP0().GetY() + edge.normal.GetY()));
 	}
 	else if (edge.normal == Vec2D::Up)
 	{
@@ -57,4 +57,13 @@ void Ball::MoveTo(const Vec2D& point)
 {
 	mBoundaryBox.MoveTo(point - Vec2D(GetRadius(), GetRadius()));
 	mCircle.MoveTo(mBoundaryBox.GetCenterPoint());
+}
+
+void Ball::Bounce(const BoundaryEdge& edge)
+{
+	Vec2D pointOnEdge;
+
+	MakeFlushWithEdge(edge, pointOnEdge, false);
+
+	mVelocity = mVelocity.Reflect(edge.normal);
 }
