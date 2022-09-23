@@ -3,6 +3,10 @@
 #include <assert.h>
 
 const Vec2D Vec2D::Zero;
+const Vec2D Vec2D::Up{ 0, -1 };
+const Vec2D Vec2D::Down{ 0, 1 };
+const Vec2D Vec2D::Left{ -1, 0 };
+const Vec2D Vec2D::Right{ 1, 0 };
 
 
 

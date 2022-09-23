@@ -15,6 +15,10 @@ class Vec2D {
 
 public:
 	static const Vec2D Zero;
+	static const Vec2D Up;
+	static const Vec2D Down;
+	static const Vec2D Left;
+	static const Vec2D Right;
 	static Vec2D CentreScreen() { return Vec2D(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2); };
 
 

@@ -131,7 +131,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Input;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\BreakOut;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Input;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,7 +149,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Input;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\BreakOut;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Input;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,7 +162,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\App\App.cpp" />
-    <ClCompile Include="src\Games\BreakOut.cpp" />
+    <ClCompile Include="src\Games\BreakOut\BreakOut.cpp" />
+    <ClCompile Include="src\Games\BreakOut\Excluder.cpp" />
     <ClCompile Include="src\Graphics\Color.cpp" />
     <ClCompile Include="src\Graphics\Screen.cpp" />
     <ClCompile Include="src\Graphics\ScreenBuffer.cpp" />
@@ -187,7 +188,15 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="src\Games\BreakOut.h">
+    <ClInclude Include="src\Games\BreakOut\BoundaryEdge.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Games\BreakOut\BreakOut.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Games\BreakOut\Excluder.h">
       <SubType>
       </SubType>
     </ClInclude>
