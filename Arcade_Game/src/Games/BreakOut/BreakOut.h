@@ -13,14 +13,20 @@
 
 #pragma once
 #include "Game.h"
+#include "Paddle.h"
 
 class BreakOut: public Game
 {
 private:
+	Paddle mPaddle;
+
+	void ResetGame();
+
 
 protected:
 
 public:
+
 	virtual void Init(GameController& controller) override;
 	virtual void Update(uint32_t deltaTime) override;
 	virtual void Draw(Screen& screen) override;

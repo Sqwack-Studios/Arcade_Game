@@ -1,5 +1,8 @@
 #include "BreakOut.h"
+#include "GameController.h"
 #include <iostream>
+
+
 
 /*
 *   Paddle
@@ -37,19 +40,63 @@
 void BreakOut::Init(GameController& controller)
 {
     std::cout << "BreakOut Game Init()" << std::endl;
-}
+    controller.ClearAll();
 
+    ButtonAction leftKeyAction;
+    leftKeyAction.key = GameController::LeftKey();
+    leftKeyAction.action = [this](uint32_t deltaTime, InputState state)
+    {
+        if (GameController::IsPressed(state))
+        {
+            mPaddle.SetMovementDirection(PaddleDirection::LEFT);
+        }
+        else
+        {
+            mPaddle.SetMovementDirection(PaddleDirection::NONE);
+        }
+    };
+    controller.AddInputActionForKey(leftKeyAction);
+
+    ButtonAction rightKeyAction;
+    leftKeyAction.key = GameController::RightKey();
+    leftKeyAction.action = [this](uint32_t deltaTime, InputState state)
+    {
+        if (GameController::IsPressed(state))
+        {
+            mPaddle.SetMovementDirection(PaddleDirection::RIGHT);
+        }
+        else
+        {
+            mPaddle.SetMovementDirection(PaddleDirection::NONE);
+        }
+    };
+    controller.AddInputActionForKey(rightKeyAction);
+}
 void BreakOut::Update(uint32_t deltaTime)
 {
     std::cout << "BreakOut Game Update()" << std::endl;
+    mPaddle.Update(deltaTime);
 }
 
 void BreakOut::Draw(Screen& screen)
 {
     std::cout << "BreakOut Game Draw()" << std::endl;
+    mPaddle.Draw(screen);
 }
 
 std::string BreakOut::GetName() const
 {
     return "BreakOut";
+}
+
+void BreakOut::ResetGame()
+{
+    AARectangle paddleRect 
+    { 
+        Vec2D(SCREEN_WIDTH / 2 - Paddle::PADDLE_WIDTH / 2, SCREEN_HEIGHT - 3 * Paddle::PADDLE_HEIGHT), 
+        Paddle::PADDLE_WIDTH, 
+        Paddle::PADDLE_HEIGHT 
+    };
+
+    mPaddle.Init(paddleRect);
 }

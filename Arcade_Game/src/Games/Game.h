@@ -19,6 +19,12 @@
 class GameController;
 class Screen;
 
+/////////////////////////////////////////////////////
+extern const int SCREEN_WIDTH;
+extern const int SCREEN_HEIGHT;
+/////////////////////////////////////////////////////
+
+
 //Game interface
 class Game
 {
