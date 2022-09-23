@@ -82,18 +82,20 @@ void BreakOut::Update(uint32_t deltaTime)
 {
     std::cout << "BreakOut Game Update()" << std::endl;
     mPaddle.Update(deltaTime);
+    mBall.Update(deltaTime);
 }
 
 void BreakOut::Draw(Screen& screen)
 {
     std::cout << "BreakOut Game Draw()" << std::endl;
     mPaddle.Draw(screen);
-    
+    mBall.Draw(screen);
 }
 
-std::string BreakOut::GetName() const
+const std::string& BreakOut::GetName() const
 {
-    return "BreakOut";
+    static std::string name{ "BreakOut" };
+    return name;
 }
 
 void BreakOut::ResetGame()
@@ -113,4 +115,7 @@ void BreakOut::ResetGame()
     };
 
     mPaddle.Init(paddleRect, levelBoundary);
+    mBall.MoveTo(Vec2D::CentreScreen());
+    std::cout << mBall.GetPosition();
+    mBall.MoveTo(Vec2D::CentreScreen());
 }
