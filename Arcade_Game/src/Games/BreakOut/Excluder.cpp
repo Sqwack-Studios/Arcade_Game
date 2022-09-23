@@ -30,7 +30,7 @@ void Excluder::SetupEdges()
       mAARect.GetBottomRightPoint().GetY() 
     };
 
-    mEdges[TOP_EDGE].normal = Vec2D::Left;
+    mEdges[LEFT_EDGE].normal = Vec2D::Left;
 
     //BOTTOM_EDGE
     mEdges[BOTTOM_EDGE].edge =

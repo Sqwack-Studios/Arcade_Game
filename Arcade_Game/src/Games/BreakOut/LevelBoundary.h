@@ -26,7 +26,7 @@ private:
 protected:
 
 public:
-
+	LevelBoundary(){}
 	LevelBoundary(const AARectangle& boundary);
 	bool HasCollided(const Ball& ball, BoundaryEdge& edge);
 	inline const AARectangle& GetAARectangle() { return mIncluder.GetAARectangle(); }

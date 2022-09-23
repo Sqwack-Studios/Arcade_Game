@@ -17,10 +17,9 @@
 
 
 const int SCREEN_WIDTH = 250;
-const int SCREEN_HEIGHT = 250;
+const int SCREEN_HEIGHT = 300;
 const int MAGNIFICATION = 3;
-//int deltaTime = 0;
-//int currentTime = 0;
+
 
 void Consume(DynamicIntArray movedArray)
 {

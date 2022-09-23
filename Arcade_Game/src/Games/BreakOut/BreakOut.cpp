@@ -1,6 +1,8 @@
 #include "BreakOut.h"
 #include "GameController.h"
 #include <iostream>
+#include "Color.h"
+#include "Screen.h"
 
 
 
@@ -80,16 +82,25 @@ void BreakOut::Init(GameController& controller)
 }
 void BreakOut::Update(uint32_t deltaTime)
 {
-    std::cout << "BreakOut Game Update()" << std::endl;
+    //std::cout << "BreakOut Game Update()" << std::endl;
     mPaddle.Update(deltaTime);
     mBall.Update(deltaTime);
+
+    BoundaryEdge edge;
+
+    if (mLevelBoundary.HasCollided(mBall, edge))
+    {
+        mBall.Bounce(edge);
+    }
+    
 }
 
 void BreakOut::Draw(Screen& screen)
 {
-    std::cout << "BreakOut Game Draw()" << std::endl;
+    //std::cout << "BreakOut Game Draw()" << std::endl;
     mPaddle.Draw(screen);
     mBall.Draw(screen);
+    screen.Draw(mLevelBoundary.GetAARectangle(), Color::White());
 }
 
 const std::string& BreakOut::GetName() const

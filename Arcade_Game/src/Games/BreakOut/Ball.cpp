@@ -4,7 +4,7 @@
 #include "Circle.h"
 #include "BoundaryEdge.h"
 
-const float Ball::RADIUS = 1.5f;
+const float Ball::RADIUS = 2.5f;
 
 Ball::Ball(): 
 	Ball(Vec2D::Zero, RADIUS)
@@ -19,7 +19,9 @@ Ball::Ball(const Vec2D& pos, float radius):
 
 void Ball::Update(uint32_t deltaTime)
 {
-	/*mBoundaryBox.MoveBy(mVelocity * MillisecondsToSeconds(deltaTime));*/
+	mBoundaryBox.MoveBy(mVelocity * MillisecondsToSeconds(deltaTime));
+	mCircle.MoveBy(mVelocity * MillisecondsToSeconds(deltaTime));
+
 }
 
 void Ball::Draw(Screen& screen)
@@ -63,7 +65,10 @@ void Ball::Bounce(const BoundaryEdge& edge)
 {
 	Vec2D pointOnEdge;
 
-	MakeFlushWithEdge(edge, pointOnEdge, false);
+	std::cout << "Bounce() called!" << std::endl;
+	MakeFlushWithEdge(edge, pointOnEdge, true);
 
+	std::cout << edge.normal;
 	mVelocity = mVelocity.Reflect(edge.normal);
+	std::cout << "New Velocity: " << mVelocity;
 }

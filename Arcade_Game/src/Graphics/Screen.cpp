@@ -106,7 +106,7 @@ void Screen::FillPoly(const std::vector<Vec2D>& points, const Color& color)
 				float pointjY = points[j].GetY();
 
 				
-				if ((IsLessThanOrEqual(pointiY, pixelY) && pointjY > (float)pixelY) || (IsLessThanOrEqual(pointjY, pixelY) && pointiY > (float)pixelY))
+				if ((pointiY <= (float)pixelY && pointjY > (float)pixelY) || (pointjY <= (float)pixelY && pointiY > (float)pixelY))
 				{
 					float denom = pointjY - pointiY;
 					if (IsEqual(denom, 0))
@@ -115,7 +115,7 @@ void Screen::FillPoly(const std::vector<Vec2D>& points, const Color& color)
 					}
 
 					float x = points[i].GetX() + (pixelY - pointiY) / (denom) * (points[j].GetX() - points[i].GetX());
- 					nodeXVec.push_back(x);
+					nodeXVec.push_back(x);
 				}
 
 				j = i;
@@ -145,7 +145,6 @@ void Screen::FillPoly(const std::vector<Vec2D>& points, const Color& color)
 					//Draw(line, color);
 					for (int pixelX = nodeXVec[k]; pixelX < nodeXVec[k + 1]; ++pixelX)
 					{
-						
 						Draw(pixelX, pixelY, color);
 					}
 				}
