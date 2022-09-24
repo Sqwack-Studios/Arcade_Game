@@ -65,7 +65,8 @@ float Line2D::Slope() const
 
 float Line2D::Lenght() const
 {
-	return 0.0f;
+	Vec2D aux{ GetP1() - GetP0() };
+	return aux.Mag();
 }
 
 void Line2D::Rotate(const float& angle, const Vec2D& aroundPoint)

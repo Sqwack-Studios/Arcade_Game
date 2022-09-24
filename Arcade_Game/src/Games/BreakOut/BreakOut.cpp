@@ -83,14 +83,19 @@ void BreakOut::Init(GameController& controller)
 void BreakOut::Update(uint32_t deltaTime)
 {
     //std::cout << "BreakOut Game Update()" << std::endl;
-    mPaddle.Update(deltaTime);
+    mPaddle.Update(deltaTime, mBall);
     mBall.Update(deltaTime);
 
     BoundaryEdge edge;
 
+    if (mPaddle.Bounce(mBall))
+    {
+        return;
+    }
     if (mLevelBoundary.HasCollided(mBall, edge))
     {
         mBall.Bounce(edge);
+        return;
     }
     
 }
