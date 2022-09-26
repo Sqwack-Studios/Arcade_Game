@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="src\App\App.cpp" />
     <ClCompile Include="src\Games\BreakOut\Ball.cpp" />
+    <ClCompile Include="src\Games\BreakOut\Block.cpp" />
     <ClCompile Include="src\Games\BreakOut\BreakOut.cpp" />
     <ClCompile Include="src\Games\BreakOut\Excluder.cpp" />
     <ClCompile Include="src\Games\BreakOut\LevelBoundary.cpp" />
@@ -192,6 +193,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\Games\BreakOut\Ball.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Games\BreakOut\Block.h">
       <SubType>
       </SubType>
     </ClInclude>
