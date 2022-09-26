@@ -97,6 +97,7 @@ void BreakOut::Update(uint32_t deltaTime)
         mBall.Bounce(edge);
         return;
     }
+    mLevel.Update(deltaTime, mBall);
     
 }
 
@@ -105,6 +106,7 @@ void BreakOut::Draw(Screen& screen)
     //std::cout << "BreakOut Game Draw()" << std::endl;
     mPaddle.Draw(screen);
     mBall.Draw(screen);
+    mLevel.Draw(screen);
     screen.Draw(mLevelBoundary.GetAARectangle(), Color::White());
 }
 
@@ -132,6 +134,7 @@ void BreakOut::ResetGame()
 
 
     mLevelBoundary = { levelBoundary };
+    mLevel.Init(levelBoundary);
 
     mPaddle.Init(paddleRect, levelBoundary);
     mBall.MoveTo(Vec2D::CentreScreen());
