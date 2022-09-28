@@ -14,6 +14,7 @@
 #pragma once
 #include "Scene.h"
 #include <memory>
+#include "BMPImage.h"
 
 enum eGame
 {
@@ -28,6 +29,9 @@ class ArcadeScene: public Scene
 {
 private:
 	std::unique_ptr<Scene> GetScene(eGame game);
+	//Temporary
+	BMPImage mTempImage;
+
 protected:
 
 public:

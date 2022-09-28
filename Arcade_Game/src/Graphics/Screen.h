@@ -23,6 +23,7 @@ class Line2D;
 class Triangle;
 class AARectangle;
 class Circle;
+class BMPImage;
 struct SDL_Window;
 struct SDL_Surface;
 
@@ -73,7 +74,7 @@ public:
 	void Draw(const Triangle& triangle, const Color& color, bool fill = false, const Color& fillColor = Color::White());
 	void Draw(const AARectangle& rect, const Color& color, bool fill = false, const Color& fillColor = Color::White());
 	void Draw(const Circle& circle, const Color& color, bool fill = false, const Color& fillColor = Color::White());
-
+	void Draw(const BMPImage& image, const Vec2D& pos);
 };
 #endif // !_Arcade_Game_Screen_H_
 

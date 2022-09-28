@@ -24,13 +24,13 @@ bool App::Init(uint32_t width, uint32_t height, uint32_t mag)
 	PushScene(std::move(arcadeScene));
 
 	//Temporary
-	{
-		std::unique_ptr<BreakOut> breakoutGame{ std::make_unique<BreakOut>() };
+	//{
+	//	std::unique_ptr<BreakOut> breakoutGame{ std::make_unique<BreakOut>() };
 
-		std::unique_ptr<GameScene> breakoutScene{ std::make_unique<GameScene>(std::move(breakoutGame)) };
+	//	std::unique_ptr<GameScene> breakoutScene{ std::make_unique<GameScene>(std::move(breakoutGame)) };
 
-		PushScene(std::move(breakoutScene));
-	}
+	//	PushScene(std::move(breakoutScene));
+	//}
 
 	
 

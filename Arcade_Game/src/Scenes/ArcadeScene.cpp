@@ -7,6 +7,7 @@
 
 #include "Utils.h"
 #include "Color.h"
+#include "App.h"
 
 
 
@@ -16,6 +17,8 @@ ArcadeScene::ArcadeScene()
 
 void ArcadeScene::Init()
 {
+	mTempImage.Load(App::GetBasePath() + "Assets/ArcadeFont.bmp");
+
 	ButtonAction action;
 	action.key = GameController::ActionKey();
 	action.action = [](uint32_t deltaTime, InputState state)
@@ -48,10 +51,12 @@ void ArcadeScene::Init()
 void ArcadeScene::Draw(Screen& theScreen)
 {
 
-	Star2D star(Vec2D::CentreScreen(), 60, 30, 5, 0.0f);
-	star.SetIsRotating(true);
-	star.SetRotationRate(-2 * PI * 120 / 360);
-	theScreen.Draw(star.SendToBuffer(), Color::Blue());
+	//Star2D star(Vec2D::CentreScreen(), 60, 30, 5, 0.0f);
+	//star.SetIsRotating(true);
+	//star.SetRotationRate(-2 * PI * 120 / 360);
+	//theScreen.Draw(star.SendToBuffer(), Color::Blue());
+
+	theScreen.Draw(mTempImage, Vec2D::Zero);
 
 }
 
