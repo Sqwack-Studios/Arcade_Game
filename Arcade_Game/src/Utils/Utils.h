@@ -1,6 +1,8 @@
 #ifndef UTILS_UTILS_H_
 #define UTILS_UTILS_H_
 
+#include <string>
+
 static const float EPSILON = 0.0001f;
 static const float PI = 3.141593f;
 static const float TWO_PI = 2.0f * PI;

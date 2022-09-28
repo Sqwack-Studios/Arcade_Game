@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include "ScreenBuffer.h"
 #include "Color.h"
+#include <string>
 #include <vector>
 
 
@@ -24,6 +25,8 @@ class Triangle;
 class AARectangle;
 class Circle;
 class BMPImage;
+class SpriteSheet;
+struct Sprite;
 struct SDL_Window;
 struct SDL_Surface;
 
@@ -74,7 +77,8 @@ public:
 	void Draw(const Triangle& triangle, const Color& color, bool fill = false, const Color& fillColor = Color::White());
 	void Draw(const AARectangle& rect, const Color& color, bool fill = false, const Color& fillColor = Color::White());
 	void Draw(const Circle& circle, const Color& color, bool fill = false, const Color& fillColor = Color::White());
-	void Draw(const BMPImage& image, const Vec2D& pos);
+	void Draw(const BMPImage& image, const Sprite& sprite, const Vec2D& pos);
+	void Draw(const SpriteSheet& ss, const std::string& spriteName, const Vec2D& pos);
 };
 #endif // !_Arcade_Game_Screen_H_
 

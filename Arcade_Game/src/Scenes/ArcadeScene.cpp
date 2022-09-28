@@ -17,7 +17,7 @@ ArcadeScene::ArcadeScene()
 
 void ArcadeScene::Init()
 {
-	mTempImage.Load(App::GetBasePath() + "Assets/ArcadeFont.bmp");
+	mTempSpriteSheet.Load("ArcadeFont");
 
 	ButtonAction action;
 	action.key = GameController::ActionKey();
@@ -56,7 +56,7 @@ void ArcadeScene::Draw(Screen& theScreen)
 	//star.SetRotationRate(-2 * PI * 120 / 360);
 	//theScreen.Draw(star.SendToBuffer(), Color::Blue());
 
-	theScreen.Draw(mTempImage, Vec2D::Zero);
+	theScreen.Draw(mTempSpriteSheet, "9", Vec2D::Zero);
 
 }
 
