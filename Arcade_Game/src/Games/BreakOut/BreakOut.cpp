@@ -1,3 +1,4 @@
+#include "App.h"
 #include "BreakOut.h"
 #include "GameController.h"
 #include <iostream>
@@ -97,7 +98,8 @@ void BreakOut::Update(uint32_t deltaTime)
         mBall.Bounce(edge);
         return;
     }
-    mLevel.Update(deltaTime, mBall);
+    GetCurrentLevel().Update(deltaTime, mBall);
+
     
 }
 
@@ -106,7 +108,7 @@ void BreakOut::Draw(Screen& screen)
     //std::cout << "BreakOut Game Draw()" << std::endl;
     mPaddle.Draw(screen);
     mBall.Draw(screen);
-    mLevel.Draw(screen);
+    GetCurrentLevel().Draw(screen);
     screen.Draw(mLevelBoundary.GetAARectangle(), Color::White());
 }
 
@@ -132,9 +134,10 @@ void BreakOut::ResetGame()
         static_cast<unsigned int>(SCREEN_HEIGHT)
     };
 
+    mLevels = BreakoutGameLevel::LoadLevelsFromFile(App::GetBasePath() + "Assets/BreakoutLevels.txt");
+    mCurrentLevel = 1;
 
     mLevelBoundary = { levelBoundary };
-    mLevel.Init(levelBoundary);
 
     mPaddle.Init(paddleRect, levelBoundary);
     mBall.MoveTo(Vec2D::CentreScreen());

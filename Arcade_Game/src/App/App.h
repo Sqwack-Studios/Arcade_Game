@@ -44,6 +44,8 @@ public:
 	void PushScene(std::unique_ptr<Scene> scene); //move semantic function, take ownership of the scene
 	void PopScene();
 	Scene* TopScene(); //current Scene
+
+	static const std::string& GetBasePath();
 };
 #endif // !_Arcade_Game_App_H_
 

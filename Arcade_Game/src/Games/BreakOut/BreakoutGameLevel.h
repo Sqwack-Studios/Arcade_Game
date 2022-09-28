@@ -15,17 +15,25 @@
 #include "Block.h"
 #include <vector>
 #include <stdint.h>
+#include "LayoutBlock.h"
+
 
 class Screen;
 class Ball;
 class AARectangle;
+struct LayoutBlock;
 
 class BreakoutGameLevel
 {
 private:
 	std::vector<Block> mBlocks;
 
+	static const int BLOCK_WIDTH = 18;
+	static const int BLOCK_HEIGHT = 8;
+
 	void CreateDefaultLevel(const AARectangle& boundary);
+	static LayoutBlock FindLayoutBlockForSymbol(const std::vector<LayoutBlock>& blocks, char symbol);
+
 protected:
 
 public:
@@ -34,6 +42,8 @@ public:
 	void Load(const std::vector<Block>& blocks);
 	void Update(uint32_t deltaTime, Ball& ball);
 	void Draw(Screen& screen);
+
+	static std::vector<BreakoutGameLevel> LoadLevelsFromFile(const std::string& filePath);
 };
 #endif // !_Arcade_Game_BreakoutGameLevel_H_
 

@@ -182,5 +182,8 @@
     <ClInclude Include="src\Games\BreakOut\BreakoutGameLevel.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\Games\BreakOut\LayoutBlock.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

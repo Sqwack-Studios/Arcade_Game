@@ -46,7 +46,9 @@ bool FileCommandLoader::LoadFile(const std::string& filePath)
             }
 
             std::string commandString{ line.substr(commandPos + 1, delimitPos) };
+
             delimitPos += 1;
+   
 
             for (size_t commandIndex = 0; commandIndex < mCommands.size(); commandIndex++)
             {
@@ -54,14 +56,19 @@ bool FileCommandLoader::LoadFile(const std::string& filePath)
                 {
                     if (mCommands[commandIndex].commandType == COMMAND_ONE_LINE)
                     {
+ 
                         ParseFuncParams params{ line, delimitPos, 0 };
+        
+     
                         mCommands[commandIndex].parseFunc(params);
+                        
                     }
                     else//Multiline command
                     {
+                        
                         std::string numLines = line.substr(delimitPos + 1);
                         int totalLines{};
-                        std::from_chars(line.data() + delimitPos, line.data() + line.length(), totalLines);
+                        std::from_chars(line.data() + (delimitPos + 1), line.data() + line.length(), totalLines);
 
                         int lineNum = 0;
 
@@ -79,6 +86,7 @@ bool FileCommandLoader::LoadFile(const std::string& filePath)
                         }
                     }
                 }
+
             }
         }
     }
@@ -90,22 +98,25 @@ Color FileCommandLoader::ReadColor(const ParseFuncParams& params)
     size_t nextSpacePos = params.line.find_first_of(" ", params.delimitPos + 1);
     //Read RED
     int r{};
-    std::from_chars(params.line.data() + params.delimitPos, params.line.data() + nextSpacePos, r);
+
+    std::from_chars(params.line.data() + (params.delimitPos + 1), params.line.data() + nextSpacePos, r);
+    
 
     size_t lastSpacePos = nextSpacePos;
     nextSpacePos = params.line.find_first_of(" ", lastSpacePos + 1);
     //Read GREEN
     int g{};
-    std::from_chars(params.line.data() + lastSpacePos, params.line.data() + nextSpacePos, g);
+    std::from_chars(params.line.data() + (lastSpacePos + 1), params.line.data() + nextSpacePos, g);
 
+    lastSpacePos = nextSpacePos;
     nextSpacePos = nextSpacePos = params.line.find_first_of(" ", lastSpacePos + 1);
     //Read BLUE
     int b{};
-    std::from_chars(params.line.data() + lastSpacePos, params.line.data() + nextSpacePos, b);
+    std::from_chars(params.line.data() + (lastSpacePos + 1), params.line.data() + nextSpacePos, b);
 
     //Read ALPHA
     int a{};
-    std::from_chars(params.line.data() + nextSpacePos, params.line.data() + params.line.length(), a);
+    std::from_chars(params.line.data() + (nextSpacePos + 1), params.line.data() + params.line.length(), a);
 
 
 
@@ -129,10 +140,10 @@ Vec2D FileCommandLoader::ReadSize(const ParseFuncParams& params)
 
 int FileCommandLoader::ReadInt(const ParseFuncParams& params)
 {
-    size_t nextSpacePos = params.line.find_first_of(" ", params.delimitPos + 1);
+ 
     int returnValue{};
 
-    std::from_chars(params.line.data() + params.delimitPos, params.line.data() + nextSpacePos, returnValue);
+    std::from_chars(params.line.data() + (params.delimitPos + 1), params.line.data() + params.line.length(), returnValue);
 
     return returnValue;
 }

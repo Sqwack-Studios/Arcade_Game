@@ -65,10 +65,10 @@ void Ball::Bounce(const BoundaryEdge& edge)
 {
 	Vec2D pointOnEdge;
 
-	std::cout << "Bounce() called!" << std::endl;
+	
 	MakeFlushWithEdge(edge, pointOnEdge, true);
 
-	std::cout << edge.normal;
+	
 	mVelocity = mVelocity.Reflect(edge.normal);
-	std::cout << "New Velocity: " << mVelocity;
+	
 }
