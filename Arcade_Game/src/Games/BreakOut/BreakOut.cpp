@@ -2,8 +2,7 @@
 #include "BreakOut.h"
 #include "GameController.h"
 #include <iostream>
-#include "Color.h"
-#include "Screen.h"
+#include "Circle.h"
 
 
 
@@ -44,23 +43,60 @@ void BreakOut::Init(GameController& controller)
 {
     std::cout << "BreakOut Game Init()" << std::endl;
     controller.ClearAll();
+    
+    
 
     ResetGame();
+
+    ButtonAction serveAction;
+    serveAction.key = GameController::ActionKey();
+    serveAction.action = [this](uint32_t deltaTime, InputState state)
+    {
+        if (mGameState == IN_SERVE)
+        {
+            if (GameController::IsPressed(state))
+            {
+                mGameState = IN_PLAY;
+
+                if (mPaddle.IsMovingLeft())
+                {
+                    mBall.SetVelocity(Vec2D(-INITIAL_BALL_SPEED, -INITIAL_BALL_SPEED));
+                }
+                else
+                {
+                    mBall.SetVelocity(Vec2D(INITIAL_BALL_SPEED, -INITIAL_BALL_SPEED));
+                }
+
+            }
+        }
+        else if (mGameState == IN_GAME_OVER)
+        {
+            if (GameController::IsPressed(state))
+            {
+                ResetGame();
+            }
+        }
+    };
+    controller.AddInputActionForKey(serveAction);
 
     ButtonAction leftKeyAction;
     leftKeyAction.key = GameController::LeftKey();
     leftKeyAction.action = [this](uint32_t deltaTime, InputState state)
     {
-        if (GameController::IsPressed(state))
+        if (mGameState == IN_PLAY || mGameState == IN_SERVE)
         {
-            mPaddle.SetMovementDirection(PaddleDirection::LEFT);
-  
+            if (GameController::IsPressed(state))
+            {
+                mPaddle.SetMovementDirection(PaddleDirection::LEFT);
+
+            }
+            else
+            {
+
+                mPaddle.UnsetMovementDirection(PaddleDirection::LEFT);
+            }
         }
-        else
-        {
- 
-            mPaddle.UnsetMovementDirection(PaddleDirection::LEFT);
-        }
+
     };
     controller.AddInputActionForKey(leftKeyAction);
 
@@ -68,15 +104,18 @@ void BreakOut::Init(GameController& controller)
     rightKeyAction.key = GameController::RightKey();
     rightKeyAction.action = [this](uint32_t deltaTime, InputState state)
     {
-        if (GameController::IsPressed(state))
+        if (mGameState == IN_PLAY || mGameState == IN_SERVE)
         {
+            if (GameController::IsPressed(state))
+            {
 
-            mPaddle.SetMovementDirection(PaddleDirection::RIGHT);
-        }
-        else
-        {
- 
-            mPaddle.UnsetMovementDirection(PaddleDirection::RIGHT);
+                mPaddle.SetMovementDirection(PaddleDirection::RIGHT);
+            }
+            else
+            {
+
+                mPaddle.UnsetMovementDirection(PaddleDirection::RIGHT);
+            }
         }
     };
     controller.AddInputActionForKey(rightKeyAction);
@@ -84,21 +123,50 @@ void BreakOut::Init(GameController& controller)
 void BreakOut::Update(uint32_t deltaTime)
 {
     //std::cout << "BreakOut Game Update()" << std::endl;
-    mPaddle.Update(deltaTime, mBall);
-    mBall.Update(deltaTime);
 
-    BoundaryEdge edge;
+    if (mGameState == IN_SERVE)
+    {
+        mPaddle.Update(deltaTime, mBall);
+        SetToServeState();
+    }
+    else if (mGameState == IN_PLAY)
+    {
+        mPaddle.Update(deltaTime, mBall);
+        mBall.Update(deltaTime);
 
-    if (mPaddle.Bounce(mBall))
-    {
-        return;
+        BoundaryEdge edge;
+
+        if (mPaddle.Bounce(mBall))
+        {
+            return;
+        }
+        if (mLevelBoundary.HasCollided(mBall, edge))
+        {
+            mBall.Bounce(edge);
+            return;
+        }
+        GetCurrentLevel().Update(deltaTime, mBall);
+
+        if (IsBallPassedCutoffY())
+        {
+            ReduceLifeByOne();
+            if (!IsGameOver())
+            {
+                SetToServeState();
+            }
+            else
+            {
+                mGameState = IN_GAME_OVER;
+            }
+        }
+        else if (GetCurrentLevel().IsLevelCompleted())
+        {
+            mCurrentLevel = (mCurrentLevel + 1) % mLevels.size();
+            ResetGame(mCurrentLevel);
+        }
     }
-    if (mLevelBoundary.HasCollided(mBall, edge))
-    {
-        mBall.Bounce(edge);
-        return;
-    }
-    GetCurrentLevel().Update(deltaTime, mBall);
+  
+
 
     
 }
@@ -110,6 +178,16 @@ void BreakOut::Draw(Screen& screen)
     mBall.Draw(screen);
     GetCurrentLevel().Draw(screen);
     screen.Draw(mLevelBoundary.GetAARectangle(), Color::White());
+
+    Circle lifeCircle(Vec2D(9, SCREEN_HEIGHT - 10), 3);
+    Line2D cutOff(Vec2D(0, mYCutoff), Vec2D(SCREEN_WIDTH, mYCutoff));
+
+    for (size_t i = 0; i < mLives; i++)
+    {
+        screen.Draw(lifeCircle, Color::Red(), true, Color::Red());
+        lifeCircle.MoveBy(Vec2D(17, 0));
+        screen.Draw(cutOff, Color::White());
+    }
 }
 
 const std::string& BreakOut::GetName() const
@@ -118,7 +196,7 @@ const std::string& BreakOut::GetName() const
     return name;
 }
 
-void BreakOut::ResetGame()
+void BreakOut::ResetGame(size_t toLevel)
 {
     AARectangle paddleRect 
     { 
@@ -135,11 +213,36 @@ void BreakOut::ResetGame()
     };
 
     mLevels = BreakoutGameLevel::LoadLevelsFromFile(App::GetBasePath() + "Assets/BreakoutLevels.txt");
-    mCurrentLevel = 1;
+    mYCutoff = SCREEN_HEIGHT - 2 * Paddle::PADDLE_HEIGHT;
+ 
+    mCurrentLevel = toLevel;
+    mLives = MAX_LIVES;
 
     mLevelBoundary = { levelBoundary };
 
     mPaddle.Init(paddleRect, levelBoundary);
     mBall.MoveTo(Vec2D::CentreScreen());
-    mBall.SetVelocity(INITIAL_BALL_VEL);
+
+    SetToServeState();
+}
+
+void BreakOut::SetToServeState()
+{
+    mGameState = IN_SERVE;
+    mBall.Stop();
+
+    mBall.MoveTo(Vec2D(mPaddle.GetAARectangle().GetCenterPoint().GetX(), mPaddle.GetAARectangle().GetTopLeftPoint().GetY() - mBall.GetRadius()));
+}
+
+bool BreakOut::IsBallPassedCutoffY() const
+{
+    return mBall.GetPosition().GetY() > mYCutoff;
+}
+
+void BreakOut::ReduceLifeByOne()
+{
+    if (mLives >= 0)
+    {
+        --mLives;
+    }
 }

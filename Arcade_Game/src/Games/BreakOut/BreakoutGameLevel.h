@@ -42,6 +42,7 @@ public:
 	void Load(const std::vector<Block>& blocks);
 	void Update(uint32_t deltaTime, Ball& ball);
 	void Draw(Screen& screen);
+	bool IsLevelCompleted() const;
 
 	static std::vector<BreakoutGameLevel> LoadLevelsFromFile(const std::string& filePath);
 };
