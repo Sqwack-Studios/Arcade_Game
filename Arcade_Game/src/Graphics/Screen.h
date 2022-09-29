@@ -26,6 +26,7 @@ class AARectangle;
 class Circle;
 class BMPImage;
 class SpriteSheet;
+class BitmapFont;
 struct Sprite;
 struct SDL_Window;
 struct SDL_Surface;
@@ -70,6 +71,8 @@ public:
 	inline uint32_t Height() const { return mHeight; }
 
 	//Draw Methods go here
+
+	//Points, lines and shapes
 	void Draw(int x, int y, const Color& color);
 	void Draw(const Vec2D& point, const Color& color);
 	void Draw(const Line2D& line, const Color& color);
@@ -77,8 +80,11 @@ public:
 	void Draw(const Triangle& triangle, const Color& color, bool fill = false, const Color& fillColor = Color::White());
 	void Draw(const AARectangle& rect, const Color& color, bool fill = false, const Color& fillColor = Color::White());
 	void Draw(const Circle& circle, const Color& color, bool fill = false, const Color& fillColor = Color::White());
-	void Draw(const BMPImage& image, const Sprite& sprite, const Vec2D& pos);
-	void Draw(const SpriteSheet& ss, const std::string& spriteName, const Vec2D& pos);
+
+	//Images
+	void Draw(const BMPImage& image, const Sprite& sprite, const Vec2D& pos, const Color& overlayColor = Color::White());
+	void Draw(const SpriteSheet& ss, const std::string& spriteName, const Vec2D& pos, const Color& overlayColor = Color::White());
+	void Draw(const BitmapFont& font, const std::string& textLine, const Vec2D& pos, const Color& overlayColor = Color::White());
 };
 #endif // !_Arcade_Game_Screen_H_
 

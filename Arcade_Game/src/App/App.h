@@ -17,6 +17,7 @@
 #include <vector>
 #include <memory>
 #include "InputController.h"
+#include "BitmapFont.h"
 
 struct SDL_Window;
 class Scene;
@@ -30,6 +31,8 @@ private:
 	std::vector<std::unique_ptr<Scene>> mSceneStack;
 
 	InputController mInputController;
+
+	BitmapFont mFont;
 
 protected:
 
@@ -46,6 +49,7 @@ public:
 	Scene* TopScene(); //current Scene
 
 	static const std::string& GetBasePath();
+	inline const BitmapFont& GetFont() const { return mFont; }
 };
 #endif // !_Arcade_Game_App_H_
 

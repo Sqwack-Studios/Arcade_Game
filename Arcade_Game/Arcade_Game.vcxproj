@@ -169,6 +169,7 @@
     <ClCompile Include="src\Games\BreakOut\Excluder.cpp" />
     <ClCompile Include="src\Games\BreakOut\LevelBoundary.cpp" />
     <ClCompile Include="src\Games\BreakOut\Paddle.cpp" />
+    <ClCompile Include="src\Graphics\BitmapFont.cpp" />
     <ClCompile Include="src\Graphics\BMPImage.cpp" />
     <ClCompile Include="src\Graphics\Color.cpp" />
     <ClCompile Include="src\Graphics\Screen.cpp" />
@@ -232,6 +233,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\Games\Game.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\BitmapFont.h">
       <SubType>
       </SubType>
     </ClInclude>

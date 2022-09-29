@@ -2,12 +2,14 @@
 #include "Screen.h"
 #include "Vec2D.h"
 #include "Star2D.h"
+#include "AARectangle.h"
 #include "GameController.h"
 #include <iostream>
 
 #include "Utils.h"
 #include "Color.h"
 #include "App.h"
+#include "BitmapFont.h"
 
 
 
@@ -17,7 +19,7 @@ ArcadeScene::ArcadeScene()
 
 void ArcadeScene::Init()
 {
-	mTempSpriteSheet.Load("ArcadeFont");
+
 
 	ButtonAction action;
 	action.key = GameController::ActionKey();
@@ -56,8 +58,18 @@ void ArcadeScene::Draw(Screen& theScreen)
 	//star.SetRotationRate(-2 * PI * 120 / 360);
 	//theScreen.Draw(star.SendToBuffer(), Color::Blue());
 
-	theScreen.Draw(mTempSpriteSheet, "9", Vec2D::Zero);
+	const BitmapFont& font = App::Singleton().GetFont();
 
+	AARectangle rect { Vec2D::Zero, App::Singleton().Width(), App::Singleton().Height()};
+
+	Vec2D textDrawPosition;
+
+	std::string text = "odio a quique";
+	textDrawPosition = font.GetDrawPosition(text, rect, BFXA_CENTER, BFYA_CENTER);
+
+	theScreen.Draw(font, text, textDrawPosition + Vec2D(0, -30));
+	theScreen.Draw(font, text, textDrawPosition, Color::Cyan());
+	theScreen.Draw(font, text, textDrawPosition + Vec2D(0, 30), Color::Red());
 }
 
 void ArcadeScene::Update(uint32_t deltaTime)

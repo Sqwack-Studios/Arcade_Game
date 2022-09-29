@@ -15,7 +15,7 @@
 #include "Scene.h"
 #include <memory>
 #include "BMPImage.h"
-#include "SpriteSheet.h"
+
 
 enum eGame
 {
@@ -30,8 +30,7 @@ class ArcadeScene: public Scene
 {
 private:
 	std::unique_ptr<Scene> GetScene(eGame game);
-	//Temporary
-	SpriteSheet mTempSpriteSheet;
+
 
 protected:
 
