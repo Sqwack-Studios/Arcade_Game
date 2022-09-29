@@ -252,8 +252,9 @@ void Screen::SwapScreen()
 
 			SDL_UpdateWindowSurface(moptrWindow);
 
-			mBackBuffer.Clear(mClearColor);
+			
 		}
+		mBackBuffer.Clear(mClearColor);
 
 
 	}

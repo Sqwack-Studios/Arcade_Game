@@ -162,6 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\App\App.cpp" />
+    <ClCompile Include="src\App\Button.cpp" />
     <ClCompile Include="src\Games\BreakOut\Ball.cpp" />
     <ClCompile Include="src\Games\BreakOut\Block.cpp" />
     <ClCompile Include="src\Games\BreakOut\BreakOut.cpp" />
@@ -193,6 +194,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App\App.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\App\Button.h">
       <SubType>
       </SubType>
     </ClInclude>
