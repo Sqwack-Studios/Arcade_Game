@@ -17,6 +17,7 @@
 #include "Color.h"
 #include <string>
 #include <vector>
+#include <functional>
 
 
 class Vec2D;
@@ -41,6 +42,8 @@ class Screen
 private:
 	static const unsigned int NUM_CIRCLE_SEGMENTS = 30;
 
+	using FillPolyFunc = std::function<Color(uint32_t x, uint32_t y)>;
+
 	uint32_t mWidth;
 	uint32_t mHeight;
 
@@ -51,7 +54,7 @@ private:
 	SDL_Surface* mnoptrWindowSurface;
 
 	void ClearScreen();
-	void FillPoly(const std::vector<Vec2D>& points, const Color& color);
+	void FillPoly(const std::vector<Vec2D>& points, FillPolyFunc func);
 
 	Screen(const Screen& screen);
 	Screen& operator=(const Screen& screen);

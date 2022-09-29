@@ -81,7 +81,7 @@ void ArcadeScene::Update(uint32_t deltaTime)
 
 const std::string& ArcadeScene::GetSceneName() const
 {
-	static std::string sceneName = "Arcade Scene";
+	static std::string sceneName = "Arcade";
     return sceneName;
 }
 
