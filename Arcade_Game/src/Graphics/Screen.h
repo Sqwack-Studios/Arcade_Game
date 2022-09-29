@@ -31,7 +31,9 @@ class BitmapFont;
 struct Sprite;
 struct SDL_Window;
 struct SDL_Surface;
-
+struct SDL_Renderer;
+struct SDL_PixelFormat;
+struct SDL_Texture;
 
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
@@ -53,6 +55,12 @@ private:
 	SDL_Window* moptrWindow;
 	SDL_Surface* mnoptrWindowSurface;
 
+	SDL_Renderer* mRenderer;
+	SDL_PixelFormat* mPixelFormat;
+	SDL_Texture* mTexture;
+
+	bool mFast;
+
 	void ClearScreen();
 	void FillPoly(const std::vector<Vec2D>& points, FillPolyFunc func);
 
@@ -66,7 +74,7 @@ public:
 	Screen();
 	~Screen();
 
-	SDL_Window* Init(uint32_t w, uint32_t h, uint32_t mag);
+	SDL_Window* Init(uint32_t w, uint32_t h, uint32_t mag, bool fast = true);
 	void SwapScreen();
 
 	inline void SetClearColor(const Color& clearColor) { mClearColor = clearColor; }
