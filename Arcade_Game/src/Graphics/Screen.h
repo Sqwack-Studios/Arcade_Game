@@ -63,6 +63,7 @@ private:
 
 	void ClearScreen();
 	void FillPoly(const std::vector<Vec2D>& points, FillPolyFunc func);
+	void InitPixelFormat();
 
 	Screen(const Screen& screen);
 	Screen& operator=(const Screen& screen);

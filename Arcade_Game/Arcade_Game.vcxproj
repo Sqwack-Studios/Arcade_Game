@@ -164,6 +164,7 @@
     <ClCompile Include="src\App\App.cpp" />
     <ClCompile Include="src\App\Button.cpp" />
     <ClCompile Include="src\Graphics\Animation.cpp" />
+    <ClCompile Include="src\Graphics\AnimationPlayer.cpp" />
     <ClCompile Include="src\Scenes\ButtonOptionsScene.cpp" />
     <ClCompile Include="src\Games\BreakOut\Ball.cpp" />
     <ClCompile Include="src\Games\BreakOut\Block.cpp" />
@@ -205,6 +206,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\Graphics\Animation.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\AnimationPlayer.h">
       <SubType>
       </SubType>
     </ClInclude>

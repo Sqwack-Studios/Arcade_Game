@@ -127,13 +127,12 @@ Vec2D FileCommandLoader::ReadSize(const ParseFuncParams& params)
 {
     size_t nextSpacePos = params.line.find_first_of(" ", params.delimitPos + 1);
     int width{};
-    std::from_chars(params.line.data() + params.delimitPos, params.line.data() + nextSpacePos, width);
+    std::from_chars(params.line.data() + (params.delimitPos + 1), params.line.data() + nextSpacePos, width);
 
     size_t lastSpacePos = nextSpacePos;
-    nextSpacePos = params.line.find_first_of(" ", lastSpacePos + 1);
 
     int height{};
-    std::from_chars(params.line.data() + lastSpacePos + 1, params.line.data() + (nextSpacePos - lastSpacePos), width);
+    std::from_chars(params.line.data() + (nextSpacePos + 1), params.line.data() + params.line.length(), height);
 
     return Vec2D(width, height);
 }

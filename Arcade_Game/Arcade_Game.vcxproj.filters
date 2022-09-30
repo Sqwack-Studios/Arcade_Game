@@ -114,6 +114,9 @@
     <ClCompile Include="src\Graphics\Animation.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\Graphics\AnimationPlayer.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Utils\Vec2D.h">
@@ -225,6 +228,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\Graphics\Animation.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\AnimationPlayer.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

@@ -97,7 +97,7 @@ std::vector<Animation> Animation::LoadAnimations(const std::string& animationFil
     fileLoader.LoadFile(animationFilePath);
 
     
-    return std::vector<Animation>();
+    return animations;
 }
 
 AnimationFrame Animation::GetAnimationFrame(uint32_t frameNum) const

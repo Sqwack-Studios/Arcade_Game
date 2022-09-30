@@ -62,6 +62,8 @@ SDL_Window* Screen::Init(uint32_t w, uint32_t h, uint32_t mag, bool fast)
 
 	moptrWindow = SDL_CreateWindow("Arcade", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mWidth * mag, mHeight * mag, 0);
 
+	
+
 	if (moptrWindow)
 	{
 		uint8_t rClear = 0;
@@ -69,15 +71,13 @@ SDL_Window* Screen::Init(uint32_t w, uint32_t h, uint32_t mag, bool fast)
 		uint8_t bClear = 0;
 		uint8_t aClear = 255;
 
-		mPixelFormat = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA8888);
-
 		if (mFast)
 		{
 			mRenderer = SDL_CreateRenderer(moptrWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 			if (mRenderer)
 			{
-				
+				InitPixelFormat();
 				mTexture = SDL_CreateTexture(mRenderer, mPixelFormat->format, SDL_TEXTUREACCESS_STREAMING, w, h);
 				SDL_SetRenderDrawColor(mRenderer, rClear, gClear, bClear, aClear);
 			}
@@ -93,6 +93,7 @@ SDL_Window* Screen::Init(uint32_t w, uint32_t h, uint32_t mag, bool fast)
 		}
 		
 	
+		
 	/*	mPixelFormat = SDL_AllocFormat(SDL_GetWindowPixelFormat(moptrWindow));*/
 	/*	SDL_PixelFormat* pixelFormat = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA8888);*/
 
@@ -109,6 +110,37 @@ SDL_Window* Screen::Init(uint32_t w, uint32_t h, uint32_t mag, bool fast)
 	return moptrWindow;
 }
 
+void Screen::InitPixelFormat()
+{
+	std::vector<std::string> s_preferredPixelFormats{
+
+		"SDL_PIXELFORMAT_ARGB8888",
+		"SDL_PIXELFORMAT_RGBA8888",
+		"SDL_PIXELFORMAT_BGRA8888"
+	};
+
+	SDL_RendererInfo info;
+	SDL_GetRendererInfo(mRenderer, &info);
+
+	int32_t foundIndex {-1};
+	std::cout << foundIndex;
+	for(Uint32 i = 0; i < info.num_texture_formats; i++)
+	{
+		auto iterator = std::find(s_preferredPixelFormats.begin(), s_preferredPixelFormats.end(), std::string(SDL_GetPixelFormatName(info.texture_formats[i])));
+		if (iterator != s_preferredPixelFormats.end())
+		{
+			foundIndex = i;
+			break;
+		}
+	}
+
+
+	
+	assert(foundIndex != -1 && "cojones");
+
+	mPixelFormat = SDL_AllocFormat(info.texture_formats[foundIndex]);
+
+}
 void Screen::ClearScreen()
 {
 	assert(moptrWindow);

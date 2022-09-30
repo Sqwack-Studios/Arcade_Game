@@ -15,6 +15,7 @@
 #include "ButtonOptionsScene.h"
 #include <memory>
 #include "BMPImage.h"
+#include "AnimationPlayer.h"
 
 
 enum eGame
@@ -31,6 +32,10 @@ class ArcadeScene: public ButtonOptionsScene
 private:
 	std::unique_ptr<Scene> GetScene(eGame game);
 
+	//temp
+
+	AnimationPlayer mAnimationPlayer;
+	SpriteSheet mSpriteSheet;
 
 protected:
 
