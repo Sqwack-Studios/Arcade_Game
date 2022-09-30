@@ -163,7 +163,7 @@
   <ItemGroup>
     <ClCompile Include="src\App\App.cpp" />
     <ClCompile Include="src\App\Button.cpp" />
-    <ClCompile Include="src\App\ButtonOptionsScene.cpp" />
+    <ClCompile Include="src\Scenes\ButtonOptionsScene.cpp" />
     <ClCompile Include="src\Games\BreakOut\Ball.cpp" />
     <ClCompile Include="src\Games\BreakOut\Block.cpp" />
     <ClCompile Include="src\Games\BreakOut\BreakOut.cpp" />
@@ -181,6 +181,7 @@
     <ClCompile Include="src\Input\InputController.cpp" />
     <ClCompile Include="src\Scenes\ArcadeScene.cpp" />
     <ClCompile Include="src\Scenes\GameScene.cpp" />
+    <ClCompile Include="src\Scenes\NotImplementedScene.cpp" />
     <ClCompile Include="src\Shapes\AARectangle.cpp" />
     <ClCompile Include="src\Shapes\Circle.cpp" />
     <ClCompile Include="src\Shapes\Line2D.cpp" />
@@ -202,7 +203,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="src\App\ButtonOptionsScene.h">
+    <ClInclude Include="src\Scenes\ButtonOptionsScene.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\NotImplementedScene.h">
       <SubType>
       </SubType>
     </ClInclude>

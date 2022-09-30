@@ -49,10 +49,11 @@ Vec2D BitmapFont::GetDrawPosition(const std::string& str, const AARectangle& box
 	uint32_t x{ 0 };
 	uint32_t y{ 0 };
 
+
 	switch (xAlign)
 	{
 		case BFXA_LEFT:
-			x = box.GetTopLeftPoint().GetX();
+			//do nothing, add x+= box.GetTopLeftPoint
 			break;
 		case BFXA_CENTER:
 			x = box.GetWidth() / 2 - textSize.width / 2;
@@ -63,14 +64,14 @@ Vec2D BitmapFont::GetDrawPosition(const std::string& str, const AARectangle& box
 		default:
 			break;
 	}
-
+	
 	switch (yAlign)
 	{
 		case BFYA_TOP:
-			y = box.GetTopLeftPoint().GetY();
+			//do nothing, add y+= box.GetTopLeftPoint
 			break;
 		case BFYA_CENTER:
-			y = box.GetHeight() / 2 - textSize.height / 2;
+			y = (box.GetHeight() / 2) - textSize.height / 2;
 			break;
 		case BFYA_BOTTOM:
 			y = box.GetHeight() - textSize.height;
@@ -79,5 +80,7 @@ Vec2D BitmapFont::GetDrawPosition(const std::string& str, const AARectangle& box
 			break;
 	}
 
+	x += box.GetTopLeftPoint().GetX();
+	y += box.GetTopLeftPoint().GetY();
 	return Vec2D(x, y);
 }
