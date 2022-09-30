@@ -43,6 +43,8 @@ struct Animation
 
 	Animation();
 
+	static std::vector<Animation> LoadAnimations(const std::string& animationFilePath);
+
 	inline void AddFrame(const std::string& frameName) { mFrameNames.push_back(frameName); }
 	inline void AddFrameColor(const Color& color) { mFrameColors.push_back(color); }
 	inline void AddOverlayFrameColor(const Color& color) { mOverlayColors.push_back(color); }
