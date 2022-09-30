@@ -55,10 +55,6 @@ void ArcadeScene::Draw(Screen& theScreen)
 	AnimationFrame frame = mAnimationPlayer.GetCurrentAnimationFrame();
 	Color frameColor = frame.frameColor;
 
-	std::cout << frameColor.GetRed();
-	std::cout << frameColor.GetBlue();
-	std::cout << frameColor.GetGreen();
-
 	theScreen.Draw(mSpriteSheet, frame.frame, frame.offSet, frameColor);
 }
 

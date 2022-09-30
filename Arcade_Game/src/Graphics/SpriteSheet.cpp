@@ -3,6 +3,7 @@
 #include "FileCommandLoader.h"
 #include "Utils.h"
 
+
 SpriteSheet::SpriteSheet()
 {
 
@@ -75,7 +76,6 @@ bool SpriteSheet::Load(const std::string& name)
 {
     bool loadedImage = mBMPImage.Load(App::GetBasePath() + std::string("Assets/") + name + ".bmp");
     bool loadedSpriteSection = LoadSpriteSections(App::GetBasePath() + std::string("Assets/") + name + ".txt");
-
 
     return loadedImage && loadedSpriteSection;
 }

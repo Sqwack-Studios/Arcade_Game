@@ -1,6 +1,7 @@
 #include "BMPImage.h"
 #include "SDL.h"
 
+
 BMPImage::BMPImage():
 	mWidth(0),
 	mHeight(0)
@@ -34,5 +35,5 @@ bool BMPImage::Load(const std::string& path)
 	SDL_UnlockSurface(bmpSurface);
 
 	SDL_FreeSurface(bmpSurface);
-
+	return true;
 }

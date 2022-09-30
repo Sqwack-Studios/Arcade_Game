@@ -123,7 +123,7 @@ void Screen::InitPixelFormat()
 	SDL_GetRendererInfo(mRenderer, &info);
 
 	int32_t foundIndex {-1};
-	std::cout << foundIndex;
+
 	for(Uint32 i = 0; i < info.num_texture_formats; i++)
 	{
 		auto iterator = std::find(s_preferredPixelFormats.begin(), s_preferredPixelFormats.end(), std::string(SDL_GetPixelFormatName(info.texture_formats[i])));
@@ -136,10 +136,9 @@ void Screen::InitPixelFormat()
 
 
 	
-	assert(foundIndex != -1 && "cojones");
+	assert(foundIndex != -1);
 
 	mPixelFormat = SDL_AllocFormat(info.texture_formats[foundIndex]);
-
 }
 void Screen::ClearScreen()
 {
