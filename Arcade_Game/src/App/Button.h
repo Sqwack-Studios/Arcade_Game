@@ -20,10 +20,25 @@
 
 class Screen;
 
-using ButtonAction = std::function<void(void)>;
+
 
 class Button
 {
+public:
+	using ButtonAction = std::function<void(void)>;
+
+	Button(const BitmapFont& bitmapFont, const Color& textcolor, const Color& highlightColor = Color::White());
+	void Init(Vec2D topLeft, unsigned int width, unsigned int height);
+
+	void Draw(Screen& theScreen);
+	void ExecuteAction();
+
+	inline void SetButtonText(const std::string& text) { mTitle = text; }
+	inline const std::string& GetButtonText() const { return mTitle; }
+	inline void SetHighlighted(bool highlighted) { mHighlighted = highlighted; }
+	inline bool IsHighlighted() const { return mHighlighted; }
+	inline void SetButtonAction(ButtonAction action) { mAction = action; }
+
 private:
 	const BitmapFont& mBitmapFont;
 	std::string mTitle;
@@ -36,20 +51,7 @@ private:
 
 protected:
 
-public:
 
-	
-	Button(const BitmapFont& bitmapFont, const Color& textcolor, const Color& highlightColor = Color::White());
-	void Init(Vec2D topLeft, unsigned int width, unsigned int height);
-
-	void Draw(Screen& theScreen);
-	void ExecuteAction();
-
-	inline void SetButtonText(const std::string& text) { mTitle = text; }
-	inline const std::string& GetButtonText() const { return mTitle; }
-	inline void SetHighlighted(bool highlighted) { mHighlighted = highlighted; }
-	inline bool IsHighlighted() const { return mHighlighted; }
-	inline void SetButtonAction(ButtonAction action) { mAction = action; }
 
 	
 };
