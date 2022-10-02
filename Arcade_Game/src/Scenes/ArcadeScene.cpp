@@ -42,9 +42,10 @@ void ArcadeScene::Init()
 
 	//temp
 	{
-		mAnimationPlayer.Init(App::GetBasePath() + "Assets/Pacman_animations.txt");
 		mSpriteSheet.Load("PacmanSprites");
-		mAnimationPlayer.Play("move_left", true);
+
+		mAnimatedSprite.Init(App::GetBasePath() + "Assets/Pacman_animations.txt", mSpriteSheet);
+		mAnimatedSprite.Play("death", true);
 	}
 }
 
@@ -52,15 +53,13 @@ void ArcadeScene::Draw(Screen& theScreen)
 {
 	ButtonOptionsScene::Draw(theScreen);
 
-	AnimationFrame frame = mAnimationPlayer.GetCurrentAnimationFrame();
-	Color frameColor = frame.frameColor;
+	mAnimatedSprite.Draw(theScreen);
 
-	theScreen.Draw(mSpriteSheet, frame.frame, frame.offSet, frameColor);
 }
 
 void ArcadeScene::Update(uint32_t deltaTime)
 {
-	mAnimationPlayer.Update(deltaTime);
+	mAnimatedSprite.Update(deltaTime);
 }
 
 

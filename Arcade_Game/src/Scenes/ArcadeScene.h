@@ -15,7 +15,7 @@
 #include "ButtonOptionsScene.h"
 #include <memory>
 #include "BMPImage.h"
-#include "AnimationPlayer.h"
+#include "AnimatedSprite.h"
 
 
 enum eGame
@@ -34,7 +34,7 @@ private:
 
 	//temp
 
-	AnimationPlayer mAnimationPlayer;
+	AnimatedSprite mAnimatedSprite;
 	SpriteSheet mSpriteSheet;
 
 protected:

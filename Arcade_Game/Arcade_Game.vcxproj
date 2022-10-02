@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="src\App\App.cpp" />
     <ClCompile Include="src\App\Button.cpp" />
+    <ClCompile Include="src\Graphics\AnimatedSprite.cpp" />
     <ClCompile Include="src\Graphics\Animation.cpp" />
     <ClCompile Include="src\Graphics\AnimationPlayer.cpp" />
     <ClCompile Include="src\Scenes\ButtonOptionsScene.cpp" />
@@ -202,6 +203,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\App\Button.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\AnimatedSprite.h">
       <SubType>
       </SubType>
     </ClInclude>
