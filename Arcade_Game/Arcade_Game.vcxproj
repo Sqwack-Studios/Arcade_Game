@@ -131,7 +131,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\BreakOut;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Input;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\PacMan\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes\Pacman;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\PacMan;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\BreakOut;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Input;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,7 +149,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\BreakOut;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Input;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\PacMan\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes\Pacman;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\PacMan;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\BreakOut;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Input;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,6 +163,9 @@
   <ItemGroup>
     <ClCompile Include="src\App\App.cpp" />
     <ClCompile Include="src\App\Button.cpp" />
+    <ClCompile Include="src\Games\PacMan\PacmanGame.cpp" />
+    <ClCompile Include="src\Games\PacMan\PacmanLevel.cpp" />
+    <ClCompile Include="src\Games\PacMan\Scenes\PacmanStartScene.cpp" />
     <ClCompile Include="src\Graphics\AnimatedSprite.cpp" />
     <ClCompile Include="src\Graphics\Animation.cpp" />
     <ClCompile Include="src\Graphics\AnimationPlayer.cpp" />
@@ -203,6 +206,18 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\App\Button.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Games\PacMan\PacmanGame.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Games\PacMan\PacmanLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Games\PacMan\Scenes\PacmanStartScene.h">
       <SubType>
       </SubType>
     </ClInclude>

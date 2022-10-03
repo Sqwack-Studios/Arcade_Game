@@ -27,6 +27,8 @@ void Ball::Update(uint32_t deltaTime)
 void Ball::Draw(Screen& screen)
 {
 	screen.Draw(mCircle, Color::Red(), true, Color::Red());
+
+	//Hitbox debugger
 	/*screen.Draw(mBoundaryBox, Color::Green());*/
 }
 

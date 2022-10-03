@@ -15,7 +15,6 @@ void NotImplementedScene::Init()
             App::Singleton().PopScene();
         }
     };
-
     mGameController.AddInputActionForKey(backAction);
 }
 

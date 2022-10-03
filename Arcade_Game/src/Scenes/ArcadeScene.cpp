@@ -6,7 +6,7 @@
 #include "GameScene.h"
 #include "NotImplementedScene.h"
 #include "BreakOut.h"
-
+#include "PacmanStartScene.h"
 
 
 
@@ -40,26 +40,18 @@ void ArcadeScene::Init()
 
 	ButtonOptionsScene::Init();
 
-	//temp
-	{
-		mSpriteSheet.Load("PacmanSprites");
-
-		mAnimatedSprite.Init(App::GetBasePath() + "Assets/Pacman_animations.txt", mSpriteSheet);
-		mAnimatedSprite.Play("death", true);
-	}
 }
 
 void ArcadeScene::Draw(Screen& theScreen)
 {
 	ButtonOptionsScene::Draw(theScreen);
 
-	mAnimatedSprite.Draw(theScreen);
 
 }
 
 void ArcadeScene::Update(uint32_t deltaTime)
 {
-	mAnimatedSprite.Update(deltaTime);
+	
 }
 
 
@@ -88,6 +80,10 @@ std::unique_ptr<Scene> ArcadeScene::GetScene(eGame game)
 
 			break;
 		case PACMAN:
+			{
+				std::unique_ptr<PacmanStartScene> pacmanStartGame = std::make_unique<PacmanStartScene>();
+				return pacmanStartGame;
+			}
 
 			break;
 		case NUM_GAMES:

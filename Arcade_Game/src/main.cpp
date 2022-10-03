@@ -16,7 +16,7 @@
 #include "App.h"
 
 
-const int SCREEN_WIDTH = 250;
+const int SCREEN_WIDTH = 225;
 const int SCREEN_HEIGHT = 300;
 const int MAGNIFICATION = 3;
 

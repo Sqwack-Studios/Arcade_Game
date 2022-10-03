@@ -66,12 +66,13 @@ SDL_Window* Screen::Init(uint32_t w, uint32_t h, uint32_t mag, bool fast)
 
 	if (moptrWindow)
 	{
+		//Clear color is black
 		uint8_t rClear = 0;
 		uint8_t gClear = 0;
 		uint8_t bClear = 0;
 		uint8_t aClear = 255;
 
-		if (mFast)
+		if (mFast)//Gpu accelerated
 		{
 			mRenderer = SDL_CreateRenderer(moptrWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
@@ -87,15 +88,13 @@ SDL_Window* Screen::Init(uint32_t w, uint32_t h, uint32_t mag, bool fast)
 				return nullptr;
 			}
 		}
-		else
+		else//Non-gpu accelerated 
 		{
 			mnoptrWindowSurface = SDL_GetWindowSurface(moptrWindow);
 		}
 		
 	
 		
-	/*	mPixelFormat = SDL_AllocFormat(SDL_GetWindowPixelFormat(moptrWindow));*/
-	/*	SDL_PixelFormat* pixelFormat = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA8888);*/
 
 		Color::InitColorFormat(mPixelFormat);
 
@@ -491,6 +490,7 @@ void Screen::Draw(const BMPImage& image, const Sprite& sprite, const Vec2D& pos,
 	const float invXAxisLengthSq = 1.0f / xAxis.Mag2();
 	const float invYAxisLengthSq = 1.0f / yAxis.Mag2();
 
+	//U-V MAPS to draw images in any scale or transformation
 	FillPoly(points, [&](uint32_t px, uint32_t py) {
 
 		Vec2D p = { static_cast<float>(px), static_cast<float>(py) };

@@ -18,6 +18,13 @@ void InputController::Update(uint32_t deltaTime)
 {
 	SDL_Event sdlEvent;
 
+
+	//*Functional aproach to the input controller "component" (e.g check Breakout::Init() implementation)
+	//*Lambda functions implement the functionality(actions) per key, per scene.
+	/////////////////
+	//Another aproach would be to bind each key with a pointer referenced to a function...
+	//this approach makes easier implementation for different mappings
+
 	while (SDL_PollEvent(&sdlEvent))
 	{
 		switch (sdlEvent.type)
