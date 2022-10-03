@@ -15,6 +15,8 @@
 #include "Vec2D.h"
 #include <vector>
 
+static const int PACMAN_MOVEMENT_SPEED = 50; //50 pixels per second
+
 enum PacmanMovement
 {
 	PACMAN_MOVEMENT_NONE = 0,

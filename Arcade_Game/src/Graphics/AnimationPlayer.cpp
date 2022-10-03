@@ -48,7 +48,7 @@ void AnimationPlayer::Update(uint32_t deltaTime)
     }
 }
 
-bool AnimationPlayer::Play(const std::string& animationName, const bool& looped)
+bool AnimationPlayer::PlayAnimation(const std::string& animationName, const bool& looped)
 {
     bool found{ false };
 
@@ -72,7 +72,7 @@ bool AnimationPlayer::Play(const std::string& animationName, const bool& looped)
     return found;
 }
 
-void AnimationPlayer::Pause()
+void AnimationPlayer::PauseAnimation()
 {
     if (!mIsFinishedPlaying)
     {
@@ -80,7 +80,7 @@ void AnimationPlayer::Pause()
     }
 }
 
-void AnimationPlayer::Resume()
+void AnimationPlayer::ResumeAnimation()
 {
     if (!mIsFinishedPlaying)
     {
@@ -88,7 +88,7 @@ void AnimationPlayer::Resume()
     }
 }
 
-void AnimationPlayer::Stop()
+void AnimationPlayer::StopAnimation()
 {
     mIsPlaying = false;
     mTime = 0;

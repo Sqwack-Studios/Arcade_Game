@@ -32,10 +32,10 @@ public:
 
 	AnimationPlayer();
 	bool Init(const std::string& animationPath);
-	bool Play(const std::string& animationName, const bool& looped);
-	void Pause();
-	void Resume();
-	void Stop();
+	bool PlayAnimation(const std::string& animationName, const bool& looped);
+	void PauseAnimation();
+	void ResumeAnimation();
+	void StopAnimation();
 	void Update(uint32_t deltaTime);
 	AnimationFrame GetCurrentAnimationFrame() const;
 

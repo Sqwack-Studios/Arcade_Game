@@ -47,12 +47,12 @@ void Actor::Update(const uint32_t& deltaTime)
             if (mDelta.GetY() < 0)
             {
                 mSprite.MoveBy(Vec2D(0, -dy));
-                mDelta.SetY(mDelta.GetX() + dy);
+                mDelta.SetY(mDelta.GetY() + dy);
             }
             else
             {
                 mSprite.MoveBy(Vec2D(0, dy));
-                mDelta.SetY(mDelta.GetX() - dy);
+                mDelta.SetY(mDelta.GetY() - dy);
             }
         }
 
@@ -70,15 +70,15 @@ void Actor::Draw(Screen& screen)
     mSprite.Draw(screen);
 }
 
-void Actor::Play(const std::string& animationName, bool looped)
+void Actor::PlayAnimation(const std::string& animationName, bool looped)
 {
-    mSprite.Play(animationName, looped);
+    mSprite.PlayAnimation(animationName, looped);
 }
 
-void Actor::Stop()
+void Actor::StopAnimation()
 {
     SetMovementDirection(PACMAN_MOVEMENT_NONE);
-    mSprite.Stop();
+    mSprite.StopAnimation();
 }
 
 AARectangle Actor::GetEatingBoundingBox() const

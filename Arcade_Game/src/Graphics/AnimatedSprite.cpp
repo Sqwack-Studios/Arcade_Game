@@ -38,9 +38,9 @@ void AnimatedSprite::Draw(Screen& theScreen)
     }
 }
 
-void AnimatedSprite::Play(const std::string& animationName, bool looped)
+void AnimatedSprite::PlayAnimation(const std::string& animationName, bool looped)
 {
-    mAnimationPlayer.Play(animationName, looped);
+    mAnimationPlayer.PlayAnimation(animationName, looped);
 }
 
 Vec2D AnimatedSprite::Size() const
@@ -48,19 +48,19 @@ Vec2D AnimatedSprite::Size() const
     return mAnimationPlayer.GetCurrentAnimationFrame().size;
 }
 
-void AnimatedSprite::Pause()
+void AnimatedSprite::PauseAnimation()
 {
-    mAnimationPlayer.Pause();
+    mAnimationPlayer.PauseAnimation();
 }
 
-void AnimatedSprite::Resume()
+void AnimatedSprite::ResumeAnimation()
 {
-    mAnimationPlayer.Resume();
+    mAnimationPlayer.ResumeAnimation();
 }
 
-void AnimatedSprite::Stop()
+void AnimatedSprite::StopAnimation()
 {
-    mAnimationPlayer.Stop();
+    mAnimationPlayer.StopAnimation();
 }
 
 const AARectangle AnimatedSprite::GetBoundingBox() const

@@ -33,12 +33,13 @@ protected:
 	inline void ResetDelta() { mDelta = Vec2D::Zero; }
 	inline void SetMovementSpeed(const uint32_t& movementSpeed) { mMovementSpeed = movementSpeed; }
 
-	void Play(const std::string& animationName, bool looped);
+	void PlayAnimation(const std::string& animationName, bool looped);
 
 	AnimatedSprite mSprite;
 
 public:
 
+	virtual ~Actor() {}
 	virtual void Init(
 		const SpriteSheet& spriteSheet, 
 		const std::string& animationsPath, 
@@ -51,7 +52,7 @@ public:
 	virtual void Update(const uint32_t& deltaTime);
 	virtual void Draw(Screen& screen);
 
-	virtual void Stop();
+	virtual void StopAnimation();
 	AARectangle GetEatingBoundingBox() const;
 
 	inline bool IsFinishedAnimation() const { return mSprite.IsFinishedPlayingAnimation(); }
@@ -61,7 +62,7 @@ public:
 	inline Vec2D Position() const { return mSprite.Position(); }
 	inline PacmanMovement GetMovementDirection() const { return mMovementDirection; }
 	inline const Color& GetSpriteColor() const { return mSprite.GetColor(); }
-	virtual inline void SetMovementDirection(PacmanMovement direction) { mMovementDirection = direction; }
+	virtual inline void SetMovementDirection(const PacmanMovement& direction) { mMovementDirection = direction; }
 
 
 

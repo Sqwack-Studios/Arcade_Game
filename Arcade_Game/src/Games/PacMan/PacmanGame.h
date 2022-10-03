@@ -14,6 +14,9 @@
 #pragma once
 #include "Game.h"
 #include "PacmanLevel.h"
+#include "Pacman.h"
+#include "InputAction.h"
+#include "SpriteSheet.h"
 
 //Overall design
 /*
@@ -70,7 +73,16 @@
 class PacmanGame: public Game
 {
 private:
+
+	void ResetGame();
+	void UpdatePacmanMovement();
+	void HandleGameControllerState(const uint32_t& deltaTime,const InputState& state, const PacmanMovement& direction);
+
 	PacmanLevel mLevel;
+	Pacman mPacman;
+	PacmanMovement mPressedDirection;
+	SpriteSheet mPacmanSpriteSheet;
+
 protected:
 
 public:

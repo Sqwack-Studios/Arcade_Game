@@ -244,7 +244,7 @@ void BreakOut::ResetGame(size_t toLevel)
 void BreakOut::SetToServeState()
 {
     mGameState = IN_SERVE;
-    mBall.Stop();
+    mBall.StopAnimation();
 
     mBall.MoveTo(Vec2D(mPaddle.GetAARectangle().GetCenterPoint().GetX(), mPaddle.GetAARectangle().GetTopLeftPoint().GetY() - mBall.GetRadius()));
 }

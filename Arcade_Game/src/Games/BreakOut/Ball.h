@@ -37,7 +37,7 @@ public:
 	void Update(uint32_t deltaTime);
 	void Draw(Screen& screen);
 	void MakeFlushWithEdge(const BoundaryEdge& edge, Vec2D& pointOnEdge, bool limitToEdge);
-	inline void Stop() { mVelocity = Vec2D::Zero; }
+	inline void StopAnimation() { mVelocity = Vec2D::Zero; }
 	void MoveTo(const Vec2D& point);
 	
 	void Bounce(const BoundaryEdge& edge);

@@ -38,11 +38,11 @@ public:
 	void Update(uint32_t deltaTime);
 	void Draw(Screen& theScreen);
 
-	void Play(const std::string& animationName, bool looped);
+	void PlayAnimation(const std::string& animationName, bool looped);
+	void PauseAnimation();
+	void ResumeAnimation();
+	void StopAnimation();
 	Vec2D Size() const;
-	void Pause();
-	void Resume();
-	void Stop();
 	const AARectangle GetBoundingBox() const;
 
 	inline Vec2D Position() const { return mPosition; }
