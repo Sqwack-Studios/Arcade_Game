@@ -6,16 +6,22 @@
 #include "Circle.h"
 #include <assert.h>
 
+namespace {
 
+    const uint32_t NUM_LEVELS = 256;
+}
 
 bool PacmanLevel::Init(const std::string& levelPath, Pacman* noptrPacman)
 {
+    mCurrentLevel = 0;
     mnoptrPacman = noptrPacman;
 
     bool levelLoaded = LoadLevel(levelPath);
     if (levelLoaded)
     {
+        
         ResetLevel();
+        ++mCurrentLevel;
     }
 
     return levelLoaded;
@@ -67,6 +73,11 @@ void PacmanLevel::Update(uint32_t deltaTime)
                 }
             }
         }
+    }
+
+    if (IsLevelOver())
+    {
+        IncreaseLevel();
     }
 }
 
@@ -203,6 +214,15 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
     };
     fileLoader.AddCommand(tileExcludePelletCommand);
 
+    Command tileIsPacmanSpawnPointCommand;
+    tileIsPacmanSpawnPointCommand.command = "tile_pacman_spawn_point";
+    tileIsPacmanSpawnPointCommand.parseFunc = [this](ParseFuncParams params) {
+
+        mTiles.back().isPacmanSpawnPoint = FileCommandLoader::ReadInt(params);
+    };
+    fileLoader.AddCommand(tileIsPacmanSpawnPointCommand);
+
+
     Command layoutCommand;
     layoutCommand.command = "layout";
     layoutCommand.commandType = COMMAND_MULTI_LINE;
@@ -228,6 +248,12 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
 
                     mWalls.push_back(wall);
                 }
+
+                if (tile->isPacmanSpawnPoint > 0)
+                {
+                    mPacmanSpawnLocation = Vec2D(startingX + tile->offset.GetX(), layoutOffset.GetY() + tile->offset.GetY());
+                }
+
                 if (tile->excludePelletTile != 0)
                 {
                     mPelletExclusionTiles.push_back(*tile);
@@ -330,4 +356,54 @@ void PacmanLevel::ResetPellets()
 void PacmanLevel::ResetLevel()
 {
     ResetPellets();
+
+    if (mnoptrPacman)
+    {
+        mnoptrPacman->MoveTo(mPacmanSpawnLocation);
+        mnoptrPacman->ResetToFirstAnimation();
+    }
+}
+
+bool PacmanLevel::HasEatenAllPellets() const
+{
+    return NumPelletsEaten() >= mPellets.size() - 4; //there are 4 super pellets, we dont count them to win
+}
+
+size_t PacmanLevel::NumPelletsEaten() const
+{
+    size_t numEaten{0};
+
+    for (const auto& pellet : mPellets)
+    {
+        if (!pellet.powerPellet && pellet.eaten)
+        {
+            ++numEaten;
+        }
+    }
+    return numEaten;
+}
+
+
+
+bool PacmanLevel::IsLevelOver() const
+{
+    return HasEatenAllPellets();
+}
+
+void PacmanLevel::IncreaseLevel()
+{
+    ++mCurrentLevel;
+
+    if (mCurrentLevel > NUM_LEVELS)
+    {
+        ResetToFirstLevel();
+    }
+
+    ResetLevel();
+}
+
+void PacmanLevel::ResetToFirstLevel()
+{
+    mCurrentLevel = 1;
+    ResetLevel();
 }

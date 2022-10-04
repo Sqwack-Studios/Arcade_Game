@@ -98,6 +98,7 @@ public:
 	virtual void Update(uint32_t deltaTime) override;
 	virtual void Draw(Screen& theScreen) override;
 	virtual const std::string& GetName() const override;
+
 };
 #endif // !_Arcade_Game_PacmanGame_H_
 

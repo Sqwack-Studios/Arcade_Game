@@ -36,6 +36,7 @@ private:
 		bool collidable{ 0 };
 		bool isTeleportTile{ 0 };
 		bool excludePelletTile{ 0 };
+		bool isPacmanSpawnPoint{ 0 };
 		char teleportToSymbol{ '0' };
 		char symbol{ '-' };
 	};
@@ -57,13 +58,17 @@ private:
 
 	Vec2D mLayoutOffset;
 	size_t mTileHeight;
+	size_t mCurrentLevel;
 	Pacman* mnoptrPacman;
+	Vec2D mPacmanSpawnLocation;
 
 
 	bool LoadLevel(const std::string& levelPath);
 	Tile* GetTileForSymbol(const char& symbol);
 	void ResetPellets();
-	void ResetLevel();
+	bool HasEatenAllPellets() const;
+	size_t NumPelletsEaten() const;
+	
 
 protected:
 
@@ -74,8 +79,13 @@ public:
 	void Update(uint32_t deltaTime);
 	void Draw(Screen& theScreen);
 	bool WillCollide(const AARectangle& aBBox, PacmanMovement direction) const;
+	void ResetLevel();
+	bool IsLevelOver() const;
+	void IncreaseLevel();
+	void ResetToFirstLevel();
 
 	inline const Vec2D& GetLayoutOffset() const { return mLayoutOffset; }
+	inline const Vec2D& GetPacmanSpawnLocation() const { return mPacmanSpawnLocation; }
 };
 #endif // !_Arcade_Game_PacmanLevel_H_
 

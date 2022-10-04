@@ -11,7 +11,7 @@ void PacmanGame::Init(GameController& controller)
     mPacman.Init(
         mPacmanSpriteSheet,
         App::Singleton().GetBasePath() + "Assets/Pacman_animations.txt",
-        Vec2D(108, 204),
+        Vec2D::Zero,
         PACMAN_MOVEMENT_SPEED,
         false);
 
@@ -58,6 +58,7 @@ void PacmanGame::Update(uint32_t deltaTime)
     UpdatePacmanMovement();
     mPacman.Update(deltaTime);
     mLevel.Update(deltaTime);
+  
 }
 
 void PacmanGame::Draw(Screen& theScreen)
@@ -95,6 +96,8 @@ void PacmanGame::ResetGame()
 {
     mPressedDirection = PACMAN_MOVEMENT_NONE;
     mPacman.ResetScore();
+    mLevel.ResetToFirstLevel();
+ 
 }
 
 void PacmanGame::UpdatePacmanMovement()
