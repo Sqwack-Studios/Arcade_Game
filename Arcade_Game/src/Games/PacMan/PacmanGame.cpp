@@ -7,13 +7,16 @@
 void PacmanGame::Init(GameController& controller)
 {
     mPacmanSpriteSheet.Load("PacmanSprites");
-    mLevel.Init(App::Singleton().GetBasePath() + "Assets/Pacman_level.txt");
+
     mPacman.Init(
         mPacmanSpriteSheet,
         App::Singleton().GetBasePath() + "Assets/Pacman_animations.txt",
-        Vec2D::Zero,
+        Vec2D(108, 204),
         PACMAN_MOVEMENT_SPEED,
         false);
+
+    mLevel.Init(App::Singleton().GetBasePath() + "Assets/Pacman_level.txt", &mPacman);
+   
 
     ResetGame();
 
@@ -52,9 +55,9 @@ void PacmanGame::Init(GameController& controller)
 
 void PacmanGame::Update(uint32_t deltaTime)
 {
-    mLevel.Update(deltaTime);
-    mPacman.Update(deltaTime);
     UpdatePacmanMovement();
+    mPacman.Update(deltaTime);
+    mLevel.Update(deltaTime);
 }
 
 void PacmanGame::Draw(Screen& theScreen)
@@ -83,7 +86,11 @@ void PacmanGame::UpdatePacmanMovement()
 {
     if (mPressedDirection != PACMAN_MOVEMENT_NONE)
     {
-        mPacman.SetMovementDirection(mPressedDirection);
+        if (!mLevel.WillCollide(mPacman.GetBoundingBox(), mPressedDirection))
+        {
+            mPacman.SetMovementDirection(mPressedDirection);
+        }
+ 
     }
 }
 

@@ -16,14 +16,19 @@
 #include "Excluder.h"
 #include <string>
 #include <vector>
+#include "PacmanGameUtils.h"
 
 class Screen;
+class Pacman;
 
 struct Tile
 {
 	Vec2D position{ Vec2D::Zero };
+	Vec2D offset{ Vec2D::Zero };
 	int width{ 0 };
 	bool collidable{ 0 };
+	bool isTeleportTile{ 0 };
+	char teleportToSymbol{ '0' };
 	char symbol{ '-' };
 };
 
@@ -38,6 +43,7 @@ private:
 
 	Vec2D mLayoutOffset;
 	size_t mTileHeight;
+	Pacman* mnoptrPacman;
 
 
 	bool LoadLevel(const std::string& levelPath);
@@ -48,9 +54,11 @@ protected:
 public:
 
 
-	bool Init(const std::string& levelPath);
+	bool Init(const std::string& levelPath, Pacman* noptrPacman);
 	void Update(uint32_t deltaTime);
 	void Draw(Screen& theScreen);
+	bool WillCollide(const AARectangle& aBBox, PacmanMovement direction) const;
 };
 #endif // !_Arcade_Game_PacmanLevel_H_
+
 
