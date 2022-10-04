@@ -2,6 +2,8 @@
 #include "Screen.h"
 #include "FileCommandLoader.h"
 #include "Pacman.h"
+#include "App.h"
+#include "Circle.h"
 #include <assert.h>
 
 
@@ -9,16 +11,23 @@
 bool PacmanLevel::Init(const std::string& levelPath, Pacman* noptrPacman)
 {
     mnoptrPacman = noptrPacman;
-    return LoadLevel(levelPath);
+
+    bool levelLoaded = LoadLevel(levelPath);
+    if (levelLoaded)
+    {
+        ResetLevel();
+    }
+
+    return levelLoaded;
 }
 
 void PacmanLevel::Update(uint32_t deltaTime)
 {
-    for (auto& wall : mWalls)
+    for (const auto& wall : mWalls)
     {
         BoundaryEdge edge;
         Vec2D outOffset;
-
+ 
         if (wall.HasCollided(mnoptrPacman->GetBoundingBox(), edge, outOffset))
         {
             mnoptrPacman->MoveBy(outOffset);
@@ -40,16 +49,52 @@ void PacmanLevel::Update(uint32_t deltaTime)
             }
         }
     }
+
+
+    for (auto& pellet : mPellets)
+    {
+        if (!pellet.eaten)
+        {
+            if (mnoptrPacman->GetBoundingBox().Intersects(pellet.mBBox))
+            {
+                pellet.eaten = true;
+                mnoptrPacman->AteItem(pellet.score);
+
+                if (pellet.powerPellet)
+                {
+                    mnoptrPacman->ResetGhostEatenMultiplier();
+                    //TODO: make ghost go vulnerable
+                }
+            }
+        }
+    }
 }
 
 void PacmanLevel::Draw(Screen& theScreen)
 {
     //debug for walls
  
-    for (auto& wall : mWalls)
+    for (const auto& wall : mWalls)
     {
         theScreen.Draw(wall.GetAARectangle(), Color::Blue());
     }
+
+    for (const auto& pellet : mPellets)
+    {
+        if (!pellet.eaten)
+        {
+            if (!pellet.powerPellet)
+            {
+                theScreen.Draw(pellet.mBBox, Color::White());
+            }
+            else
+            {
+                Circle c{ pellet.mBBox.GetCenterPoint(), pellet.mBBox.GetWidth() / 2.0f };
+                theScreen.Draw(c, Color::White(), true, Color::White());
+            }
+        }
+    }
+    
 }
 
 bool PacmanLevel::WillCollide(const AARectangle& aBBox, PacmanMovement direction) const
@@ -150,6 +195,14 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
     };
     fileLoader.AddCommand(offSetCommand);
 
+    Command tileExcludePelletCommand;
+    tileExcludePelletCommand.command = "tile_exclude_pellet";
+    tileExcludePelletCommand.parseFunc = [this](ParseFuncParams params) {
+
+        mTiles.back().excludePelletTile = FileCommandLoader::ReadInt(params);
+    };
+    fileLoader.AddCommand(tileExcludePelletCommand);
+
     Command layoutCommand;
     layoutCommand.command = "layout";
     layoutCommand.commandType = COMMAND_MULTI_LINE;
@@ -175,6 +228,10 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
 
                     mWalls.push_back(wall);
                 }
+                if (tile->excludePelletTile != 0)
+                {
+                    mPelletExclusionTiles.push_back(*tile);
+                }
 
                 startingX += tile->width;
             }
@@ -187,7 +244,7 @@ bool PacmanLevel::LoadLevel(const std::string& levelPath)
         return fileLoader.LoadFile(levelPath);
 }
 
-Tile* PacmanLevel::GetTileForSymbol(const char& symbol)
+PacmanLevel::Tile* PacmanLevel::GetTileForSymbol(const char& symbol)
 {
     for (auto& tile : mTiles)
     {
@@ -196,4 +253,81 @@ Tile* PacmanLevel::GetTileForSymbol(const char& symbol)
     }
 
     return nullptr;
+}
+
+void PacmanLevel::ResetPellets()
+{
+    mPellets.clear();
+
+    const uint32_t PADDING = static_cast<uint32_t>(mTileHeight);
+    const uint32_t LEVEL_HEIGHT = mLayoutOffset.GetY() + 32 * mTileHeight;
+
+    uint32_t startingY = mLayoutOffset.GetY() + PADDING + mTileHeight - 1;
+    uint32_t startingX = PADDING + 3;
+
+    Pellet p;
+    p.score = 10;
+    uint32_t row = 0;
+
+    for (uint32_t y = startingY; y < LEVEL_HEIGHT; y += PADDING, ++row)
+    {
+        for (uint32_t x = startingX, col = 0; x < SCREEN_WIDTH; x += PADDING, ++col)
+        {
+            if (row == 0 || col == 22)
+            {
+                if (col == 0 || col == 25)
+                {
+                    p.powerPellet = 1;
+                    p.score = 50;
+                    p.mBBox = AARectangle(Vec2D(x - 3, y - 3), mTileHeight, mTileHeight);
+                    mPellets.push_back(p);
+
+                    p.powerPellet = 0;
+                    p.score = 10;
+
+                    continue;
+                }
+            }
+
+            AARectangle rect = AARectangle(Vec2D(x, y), p.PELLET_SIZE, p.PELLET_SIZE);
+            bool found = false;
+
+            for (const Excluder& wall : mWalls)
+            {
+                if (wall.GetAARectangle().Intersects(rect))
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                for (const Tile& excludedPelletTile : mPelletExclusionTiles)
+                {
+                    if (excludedPelletTile.excludePelletTile)
+                    {
+                        AARectangle tileAABB(excludedPelletTile.position, excludedPelletTile.width, mTileHeight);
+
+                        if (tileAABB.Intersects(rect))
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (!found)
+            {
+                p.mBBox = rect;
+                mPellets.push_back(p);
+            }
+        }
+    }
+}
+
+void PacmanLevel::ResetLevel()
+{
+    ResetPellets();
 }

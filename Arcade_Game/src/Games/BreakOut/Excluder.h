@@ -31,7 +31,7 @@ public:
 	void Init(const AARectangle& rect, bool reverseNormals = false);
 	bool HasCollided(const AARectangle& rect, BoundaryEdge& edge, Vec2D& OutOffset) const;
 
-	inline const AARectangle& GetAARectangle() { return mAARect; }
+	inline const AARectangle& GetAARectangle() const { return mAARect; }
 	void MoveBy(const Vec2D& delta);
 	void MoveTo(const Vec2D& point);
 	const BoundaryEdge& GetEdge(EdgeType edge) const;

@@ -65,6 +65,21 @@ void PacmanGame::Draw(Screen& theScreen)
     
     mLevel.Draw(theScreen);
     mPacman.Draw(theScreen);
+
+    //Draw Score
+    {
+        Vec2D levelOffset = mLevel.GetLayoutOffset();
+        AARectangle highScoreRect = AARectangle(Vec2D(0, 4), SCREEN_WIDTH, levelOffset.GetY());
+
+        const BitmapFont& font = App::Singleton().GetFont();
+        Vec2D textDrawPosition;
+
+        std::string scoreStr = std::to_string(mPacman.Score());
+
+        textDrawPosition = font.GetDrawPosition(SCORE_STR + scoreStr, highScoreRect, BFXA_CENTER, BFYA_CENTER);
+
+        theScreen.Draw(font, SCORE_STR + scoreStr, textDrawPosition);
+    }
 }
 
 const std::string& PacmanGame::GetName() const

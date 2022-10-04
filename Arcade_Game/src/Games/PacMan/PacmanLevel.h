@@ -21,25 +21,39 @@
 class Screen;
 class Pacman;
 
-struct Tile
-{
-	Vec2D position{ Vec2D::Zero };
-	Vec2D offset{ Vec2D::Zero };
-	int width{ 0 };
-	bool collidable{ 0 };
-	bool isTeleportTile{ 0 };
-	char teleportToSymbol{ '0' };
-	char symbol{ '-' };
-};
+
 
 
 class PacmanLevel
 {
 private:
-	
+
+	struct Tile
+	{
+		Vec2D position{ Vec2D::Zero };
+		Vec2D offset{ Vec2D::Zero };
+		int width{ 0 };
+		bool collidable{ 0 };
+		bool isTeleportTile{ 0 };
+		bool excludePelletTile{ 0 };
+		char teleportToSymbol{ '0' };
+		char symbol{ '-' };
+	};
+
+	struct Pellet
+	{
+		uint32_t score{ 0 };
+		AARectangle mBBox;
+		int powerPellet{ 0 };
+		bool eaten{ 0 };
+
+		const uint32_t PELLET_SIZE = 2;
+	};
 
 	std::vector<Excluder> mWalls;
 	std::vector<Tile> mTiles;
+	std::vector<Tile> mPelletExclusionTiles;
+	std::vector<Pellet> mPellets;
 
 	Vec2D mLayoutOffset;
 	size_t mTileHeight;
@@ -48,6 +62,8 @@ private:
 
 	bool LoadLevel(const std::string& levelPath);
 	Tile* GetTileForSymbol(const char& symbol);
+	void ResetPellets();
+	void ResetLevel();
 
 protected:
 
@@ -58,6 +74,8 @@ public:
 	void Update(uint32_t deltaTime);
 	void Draw(Screen& theScreen);
 	bool WillCollide(const AARectangle& aBBox, PacmanMovement direction) const;
+
+	inline const Vec2D& GetLayoutOffset() const { return mLayoutOffset; }
 };
 #endif // !_Arcade_Game_PacmanLevel_H_
 

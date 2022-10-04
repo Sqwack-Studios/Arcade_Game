@@ -70,6 +70,12 @@
 
 */
 
+namespace {
+
+	const std::string SCORE_STR = "Score ";
+}
+
+
 class PacmanGame: public Game
 {
 private:
@@ -82,6 +88,7 @@ private:
 	Pacman mPacman;
 	PacmanMovement mPressedDirection;
 	SpriteSheet mPacmanSpriteSheet;
+
 
 protected:
 
