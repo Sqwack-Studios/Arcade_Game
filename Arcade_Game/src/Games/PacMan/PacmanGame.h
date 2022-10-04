@@ -73,6 +73,9 @@
 namespace {
 
 	const std::string SCORE_STR = "Score ";
+	const std::string PACMAN_LIFE_SPRITE_NAME = "pac_man_left_idle";
+	const size_t MAX_NUM_LIVES = 3;
+
 }
 
 
@@ -83,12 +86,13 @@ private:
 	void ResetGame();
 	void UpdatePacmanMovement();
 	void HandleGameControllerState(const uint32_t& deltaTime,const InputState& state, const PacmanMovement& direction);
+	void DrawLives(Screen& theScreen);
 
 	PacmanLevel mLevel;
 	Pacman mPacman;
 	PacmanMovement mPressedDirection;
 	SpriteSheet mPacmanSpriteSheet;
-
+	size_t mNumLives;
 
 protected:
 

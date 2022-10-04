@@ -15,7 +15,7 @@ void PacmanGame::Init(GameController& controller)
         PACMAN_MOVEMENT_SPEED,
         false);
 
-    mLevel.Init(App::Singleton().GetBasePath() + "Assets/Pacman_level.txt", &mPacman);
+    mLevel.Init(App::Singleton().GetBasePath() + "Assets/Pacman_level.txt", &mPacman, &mPacmanSpriteSheet);
    
 
     ResetGame();
@@ -81,6 +81,23 @@ void PacmanGame::Draw(Screen& theScreen)
 
         theScreen.Draw(font, SCORE_STR + scoreStr, textDrawPosition);
     }
+
+    DrawLives(theScreen);
+}
+
+void PacmanGame::DrawLives(Screen& theScreen)
+{
+    const uint32_t X_PAD{ 1 };
+
+    Sprite sprite = mPacmanSpriteSheet.GetSprite(PACMAN_LIFE_SPRITE_NAME);
+
+    uint32_t xPos{ X_PAD };
+
+    for (size_t i = 0; i < mNumLives; ++i)
+    {
+        theScreen.Draw(mPacmanSpriteSheet.GetBMPImage(), sprite, Vec2D(xPos, SCREEN_HEIGHT - sprite.height));
+        xPos += X_PAD + sprite.width;
+    }
 }
 
 const std::string& PacmanGame::GetName() const
@@ -94,6 +111,7 @@ const std::string& PacmanGame::GetName() const
 
 void PacmanGame::ResetGame()
 {
+    mNumLives = 3;
     mPressedDirection = PACMAN_MOVEMENT_NONE;
     mPacman.ResetScore();
     mLevel.ResetToFirstLevel();
