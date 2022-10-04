@@ -25,6 +25,8 @@ Screen::Screen():
 
 Screen::~Screen()
 {
+	mBackBuffer.FreeBuffer();
+
 	if (mRenderer)
 	{
 		SDL_DestroyRenderer(mRenderer);
@@ -45,6 +47,8 @@ Screen::~Screen()
 		SDL_DestroyWindow(moptrWindow);
 		moptrWindow = nullptr;
 	}
+
+	
 	SDL_Quit();
 }
 

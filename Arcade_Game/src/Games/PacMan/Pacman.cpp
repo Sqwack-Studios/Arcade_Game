@@ -45,7 +45,8 @@ void Pacman::SetMovementDirection(const PacmanMovement& movementDir)
 		PlayAnimation("move_up", true);
 	}
 
-	ResetDelta();
+	/*ResetDelta();*/
+
 
 	Actor::SetMovementDirection(movementDir);
 }

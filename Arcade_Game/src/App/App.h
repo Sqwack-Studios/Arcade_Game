@@ -39,6 +39,7 @@ protected:
 public:
 	static App& Singleton();
 	bool Init(uint32_t width, uint32_t height, uint32_t mag);
+	~App();
 	void Run();
 
 	inline uint32_t Width() const { return mScreen.Width(); }

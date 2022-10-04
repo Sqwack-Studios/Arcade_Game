@@ -31,6 +31,11 @@ bool App::Init(uint32_t width, uint32_t height, uint32_t mag)
     return mnoptrWindow != nullptr;
 }
 
+App::~App()
+{
+	mScreen.~Screen();
+}
+
 void App::Run()
 {
 	if (!mnoptrWindow)
@@ -91,7 +96,6 @@ void App::Run()
 		
 	}
 
-	mScreen.~Screen();
 }
 
 void App::PushScene(std::unique_ptr<Scene> scene)

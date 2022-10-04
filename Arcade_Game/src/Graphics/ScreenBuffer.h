@@ -41,7 +41,7 @@ public:
 	inline SDL_Surface* GetSurface() { return mSurface; }
 
 	void Clear(const Color& color = Color::Black());
-
+	void FreeBuffer();
 	void SetPixel(const Color& color, int x, int y);
 
 	

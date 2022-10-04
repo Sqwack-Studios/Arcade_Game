@@ -12,10 +12,7 @@ ScreenBuffer::ScreenBuffer(const ScreenBuffer& screenBuffer)
 
 ScreenBuffer::~ScreenBuffer()
 {
-	if (mSurface)
-	{
-		SDL_FreeSurface(mSurface);
-	}
+
 }
 
 ScreenBuffer::ScreenBuffer(ScreenBuffer&& otherScreenBuffer) noexcept:
@@ -82,6 +79,15 @@ void ScreenBuffer::Clear(const Color& color)
 	if (mSurface)
 	{
 		SDL_FillRect(mSurface, nullptr, color.GetPixelColor());
+	}
+}
+
+void ScreenBuffer::FreeBuffer()
+{
+	if (mSurface)
+	{
+		SDL_FreeSurface(mSurface);
+		mSurface = nullptr;
 	}
 }
 

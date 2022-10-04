@@ -89,7 +89,7 @@
     <TargetName>Rooster</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
+    <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\intermidiates\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>Rooster</TargetName>
@@ -128,20 +128,24 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\PacMan\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes\Pacman;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\PacMan;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\BreakOut;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Input;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Arcade_Game\src\App;$(SolutionDir)Arcade_Game\src\Graphics;$(SolutionDir)Arcade_Game\src\Input;$(SolutionDir)Arcade_Game\src\Assets;$(SolutionDir)Arcade_Game\src\Games;$(SolutionDir)Arcade_Game\src\Games\BreakOut;$(SolutionDir)Arcade_Game\src\Games\PacMan;$(SolutionDir)Arcade_Game\src\Games\PacMan\Scenes;$(SolutionDir)Arcade_Game\src\Utils;$(SolutionDir)Arcade_Game\src\Shapes;$(SolutionDir)Arcade_Game\src\Scenes;D:\C++\librerías\Dev\SDL2-2.24.0\include</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\C++\librerías\Dev\SDL2-2.24.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -153,7 +157,9 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\PacMan\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes\Pacman;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\PacMan;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games\BreakOut;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Games;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Input;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Scenes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\App;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Shapes;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Graphics;D:\C++\Programas\Arcade_Game\Arcade_Game\src\Utils;D:\C++\librerías\Dev\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Arcade_Game\src\App;$(SolutionDir)Arcade_Game\src\Graphics;$(SolutionDir)Arcade_Game\src\Input;$(SolutionDir)Arcade_Game\src\Assets;$(SolutionDir)Arcade_Game\src\Games;$(SolutionDir)Arcade_Game\src\Games\BreakOut;$(SolutionDir)Arcade_Game\src\Games\PacMan;$(SolutionDir)Arcade_Game\src\Games\PacMan\Scenes;$(SolutionDir)Arcade_Game\src\Utils;$(SolutionDir)Arcade_Game\src\Shapes;$(SolutionDir)Arcade_Game\src\Scenes;D:\C++\librerías\Dev\SDL2-2.24.0\include</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,6 +168,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\C++\librerías\Dev\SDL2-2.24.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>PGOptimization</LinkTimeCodeGeneration>
+      <AdditionalOptions>/GENPROFILE %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
