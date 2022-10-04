@@ -176,6 +176,7 @@
     <ClCompile Include="src\App\App.cpp" />
     <ClCompile Include="src\App\Button.cpp" />
     <ClCompile Include="src\Games\PacMan\Actor.cpp" />
+    <ClCompile Include="src\Games\PacMan\Ghost.cpp" />
     <ClCompile Include="src\Games\PacMan\Pacman.cpp" />
     <ClCompile Include="src\Games\PacMan\PacmanGame.cpp" />
     <ClCompile Include="src\Games\PacMan\PacmanGameUtils.cpp" />
@@ -225,6 +226,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\Games\PacMan\Actor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Games\PacMan\Ghost.h">
       <SubType>
       </SubType>
     </ClInclude>
